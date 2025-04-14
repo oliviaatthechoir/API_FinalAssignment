@@ -804,11 +804,8 @@ void Alien::Update()
 	}
 }
 
-void Alien::Render(Texture2D texture) 
+void Alien::Render(Texture2D texture) const 
 {
-	
-	
-	
 
 	DrawTexturePro(texture,
 		{
