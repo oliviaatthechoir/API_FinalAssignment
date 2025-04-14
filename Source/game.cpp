@@ -466,7 +466,7 @@ void Game::Render()
 
 			for (int i = 0; i < Leaderboard.size(); i++)
 			{
-				char* tempNameDisplay = Leaderboard[i].name.data();
+				char const* tempNameDisplay = Leaderboard[i].name.data();
 				DrawText(tempNameDisplay, 50, 140 + (i * 40), 40, YELLOW);
 				DrawText(TextFormat("%i", Leaderboard[i].score), 350, 140 + (i * 40), 40, YELLOW);
 			}
