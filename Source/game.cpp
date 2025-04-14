@@ -5,6 +5,8 @@
 #include <thread>
 #include <fstream>
 
+//TODO: seperate functionalities here 
+
 
 // MATH FUNCTIONS
 float lineLength(Vector2 A, Vector2 B) //Uses pythagoras to calculate the length of a line

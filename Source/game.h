@@ -4,6 +4,7 @@
 #include "Resources.h"
 #include <string>
 
+//TODO: seperate functionalities here 
 
 enum struct State
 {
