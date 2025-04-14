@@ -120,7 +120,7 @@ struct Background
 
 	void Initialize(int starAmount);
 	void Update(float offset) const;
-	void Render();
+	void Render() const;
 
 };
 
