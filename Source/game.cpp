@@ -806,8 +806,7 @@ void Alien::Update()
 
 void Alien::Render(Texture2D texture) 
 {
-	//DrawRectangle((int)position.x - 25, (int)position.y, 30, 30, RED);
-	//DrawCircle((int)position.x, (int)position.y, radius, GREEN);
+	
 	
 	
 
