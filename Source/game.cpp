@@ -508,7 +508,7 @@ bool Game::CheckNewHighScore()
 	return false;
 }
 
-void Game::InsertNewHighScore(std::string name)
+void Game::InsertNewHighScore(const std::string& name)
 {
 	PlayerData newData;
 	newData.name = name;
