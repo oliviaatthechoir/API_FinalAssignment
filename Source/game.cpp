@@ -726,7 +726,6 @@ void Projectile::Update()
 
 void Projectile::Render(Texture2D texture)
 {
-	//DrawCircle((int)position.x, (int)position.y, 10, RED);
 	DrawTexturePro(texture,
 		{
 			0,
