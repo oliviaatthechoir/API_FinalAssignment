@@ -833,7 +833,7 @@ void Star::Update(float starOffset)
 
 }
 
-void Star::Render()
+void Star::Render() const
 {
 	DrawCircle((int)position.x, (int)position.y, size, color);
 }
