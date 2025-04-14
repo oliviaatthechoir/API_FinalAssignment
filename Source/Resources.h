@@ -7,7 +7,7 @@
 struct Resources 
 {
 	void Load();
-	
+	void Unload(); 
 
 	std::vector<Texture2D> shipTextures;
 	Texture2D alienTexture;

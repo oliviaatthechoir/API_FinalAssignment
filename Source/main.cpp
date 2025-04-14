@@ -86,6 +86,7 @@ int main(void)
     CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
+    resources.Unload(); 
     std::string filename = "level.txt";  
 
     return 0;

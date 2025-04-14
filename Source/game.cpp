@@ -886,7 +886,7 @@ void Background::Render() const
 
 
 /*LEGACY CODE
-	// our objective is to calculate the distance between the closest point of the line to the centre of the circle,
+	// our objective is to calculate the distance between the closest point of the line to the centre of the circle,i
 	// and determine if it is shorter than the radius.
 
 	// we can imagine the edges of the line and circle centre to form a triangle. calculating the height of the
