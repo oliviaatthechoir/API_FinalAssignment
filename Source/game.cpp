@@ -847,9 +847,6 @@ void Background::Initialize(int starAmount)
 
 		newStar.initPosition.x = GetRandomValue(-150, GetScreenWidth() + 150);
 		newStar.initPosition.y = GetRandomValue(0, GetScreenHeight());
-		
-		//random color?
-		newStar.color = SKYBLUE;
 
 		newStar.size = GetRandomValue(1, 4) / static_cast<float>(2);
 
