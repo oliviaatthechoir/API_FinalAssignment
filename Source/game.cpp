@@ -542,7 +542,7 @@ void Game::LoadLeaderboard() const
 	//CLOSE FILE
 }
 
-void Game::SaveLeaderboard()
+void Game::SaveLeaderboard() const 
 {
 	// SAVE LEADERBOARD AS ARRAY
 
