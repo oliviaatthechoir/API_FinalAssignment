@@ -743,7 +743,7 @@ void Projectile::Render(Texture2D texture) const
 		WHITE);
 }
 
-void Wall::Render(Texture2D texture) 
+void Wall::Render(Texture2D texture) const 
 {
 	DrawTexturePro(texture,
 		{
