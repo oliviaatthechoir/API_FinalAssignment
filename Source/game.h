@@ -119,7 +119,7 @@ struct Background
 	std::vector<Star> Stars;
 
 	void Initialize(int starAmount);
-	void Update(float offset) const;
+	void Update(float offset);
 	void Render() const;
 
 };

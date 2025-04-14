@@ -855,9 +855,9 @@ void Background::Initialize(int starAmount)
 	}
 }
 
-void Background::Update(float offset) const 
+void Background::Update(float offset)
 {
-	for (auto star : Stars) {
+	for (auto& star : Stars) {
 		star.Update(offset); 
 	}	
 }
