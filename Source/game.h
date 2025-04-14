@@ -167,7 +167,7 @@ struct Game
 
 	void InsertNewHighScore(const std::string_view& name);
 
-	void LoadLeaderboard();
+	void LoadLeaderboard() const;
 	void SaveLeaderboard();
 
 

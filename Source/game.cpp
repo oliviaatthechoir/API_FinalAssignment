@@ -529,7 +529,7 @@ void Game::InsertNewHighScore(const std::string_view& name)
 	}
 }
 
-void Game::LoadLeaderboard()
+void Game::LoadLeaderboard() const 
 {
 	// CLEAR LEADERBOARD
 
