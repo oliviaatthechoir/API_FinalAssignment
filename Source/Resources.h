@@ -2,6 +2,8 @@
 #include "raylib.h"
 #include "vector"
 
+//TODO: unload resources 
+
 struct Resources 
 {
 	void Load();
