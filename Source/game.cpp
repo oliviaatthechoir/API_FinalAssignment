@@ -244,25 +244,29 @@ void Game::Update()
 				++it; 
 			}
 		}
-		for (int i = 0; i < Aliens.size(); i++)
+		for (auto it = Aliens.begin(); it != Aliens.end(); )
 		{
-			if (Aliens[i].active == false)
+			if (!it->active)
 			{
-				Aliens.erase(Aliens.begin() + i);
-				i--;
+				it = Aliens.erase(it); 
+			}
+			else
+			{
+				++it; 
 			}
 		}
-		for (int i = 0; i < Walls.size(); i++)
+		for (auto it = Walls.begin(); it != Walls.end(); )
 		{
-			if (Walls[i].active == false)
+			if (!it->active)
 			{
-				Walls.erase(Walls.begin() + i);
-				i--;
+				it = Walls.erase(it); 
+			}
+			else
+			{
+				++it; 
 			}
 		}
 
-			
-		
 
 	break;
 	case State::ENDSCREEN:
