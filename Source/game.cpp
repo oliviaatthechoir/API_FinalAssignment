@@ -272,11 +272,6 @@ void Game::Update()
 			Start(); 
 		}
 
-	
-
-		
-
-
 		break;
 	default:
 		//SHOULD NOT HAPPEN
