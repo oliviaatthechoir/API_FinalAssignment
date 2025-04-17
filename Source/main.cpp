@@ -49,11 +49,7 @@ int main(void)
     //--------------------------------------------------------------------------------------
 
     InitAudioDevice();
-
-    auto sound = LoadSound("./hitHurt.ogg");
-    
-
-
+   
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
