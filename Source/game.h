@@ -127,13 +127,9 @@ struct Game
 	//TODO: an example of how to use RAII to make safe use of resources as a members. Either everything loads and initializes correctly or Game will never construct.
 	TextureResource alien = TextureResource("./Assets/Alien.png"); 
 
-	
 
 	// Gamestate
 	State gameState = {};
-
-	// Score
-	int score;
 
 	// for later, make a file where you can adjust the number of walls (config file) 
 	int wallCount = 5;
@@ -186,15 +182,6 @@ struct Game
 	Vector2 alienPos; 
 	Vector2 cornerPos;
 	float offset;
-
-
-
-	//TEXTBOX ENTER
-	char name[9 + 1] = "\0";      //One extra space required for null terminator char '\0'
-	int letterCount = 0;
-
-	Rectangle textBox = { 600, 500, 225, 50 };
-	bool mouseOnText = false;
 
 	int framesCounter = 0;
 
