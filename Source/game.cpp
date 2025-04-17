@@ -317,9 +317,9 @@ void Game::Render()
 		}
 
 		//alien rendering  
-		for (int i = 0; i < Aliens.size(); i++)
+		for (auto const& alien : Aliens)
 		{
-			Aliens[i].Render(resources.alienTexture);
+			alien.Render(resources.alienTexture);
 		}
 
 
