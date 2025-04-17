@@ -111,8 +111,6 @@ struct Star
 
 struct Background
 {
-	
-
 	std::vector<Star> Stars;
 
 	void Initialize(int starAmount);

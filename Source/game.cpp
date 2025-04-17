@@ -62,9 +62,6 @@ void Game::Start()
 	newBackground.Initialize(600);
 	background = newBackground;
 
-	//reset score
-	score = 0;
-
 	gameState = State::GAMEPLAY;
 
 }
@@ -168,7 +165,7 @@ void Game::Update()
 						// Set them as inactive, will be killed later
 						projectile.active = false;
 						alien.active = false;
-						score += 100;
+						
 					}
 				}
 			}
