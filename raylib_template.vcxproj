@@ -172,7 +172,7 @@
     <ClInclude Include="level.h" />
     <ClInclude Include="Source\game.h" />
     <ClInclude Include="Source\Resources.h" />
-    <ClInclude Include="TextureResources.h" />
+    <ClInclude Include="TextureResource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
