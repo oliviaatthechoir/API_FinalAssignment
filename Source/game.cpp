@@ -290,18 +290,14 @@ void Game::Render()
 
 		DrawText("PRESS SPACE TO BEGIN", 200, 350, 40, YELLOW);
 
-
 		break;
 	case State::GAMEPLAY:
-		//Code
-
-
-		//background render LEAVE THIS AT TOP
+		//background render
 		background.Render();
 
 		DrawText(TextFormat("Lives: %i", player.lives), 50, 70, 40, YELLOW);
 
-		//player rendering 
+		//player rendering
 		player.Render(resources.shipTextures[player.activeTexture]);
 
 		//projectile rendering
@@ -325,20 +321,11 @@ void Game::Render()
 
 		break;
 	case State::ENDSCREEN:
-		//Code
-
-	
 		DrawText("PRESS ENTER TO CONTINUE", 600, 200, 40, YELLOW);
-
-			
-	
-
-		
-
 
 		break;
 	default:
-		//SHOULD NOT HAPPEN
+		
 		break;
 	}
 }
