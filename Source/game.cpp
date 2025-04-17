@@ -116,11 +116,11 @@ void Game::Update()
 		player.Update();
 		
 		//Update Aliens and Check if they are past player
-		for (int i = 0; i < Aliens.size(); i++)
+		for (auto& alien : Aliens)
 		{
-			Aliens[i].Update(); 
+			alien.Update(); 
 
-			if (Aliens[i].position.y > GetScreenHeight() - player.player_base_height)
+			if (alien.position.y > GetScreenHeight() - player.player_base_height) 
 			{
 				End();
 			}
@@ -147,14 +147,13 @@ void Game::Update()
 
 
 		//UPDATE PROJECTILE
-		for (int i = 0; i < Projectiles.size(); i++)
-		{
-			Projectiles[i].Update();
+		for (auto& projectile : Projectiles) {
+			projectile.Update(); 
 		}
-		//UPDATE PROJECTILE
-		for (int i = 0; i < Walls.size(); i++)
-		{
-			Walls[i].Update();
+
+		//UPDATE WALLS
+		for (auto& wall : Walls) {
+			wall.Update(); 
 		}
 
 		//CHECK ALL COLLISONS HERE
