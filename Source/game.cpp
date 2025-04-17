@@ -268,7 +268,9 @@ void Game::Update()
 	case State::ENDSCREEN:
 		//Code
 	
-		
+		if (IsKeyPressed(KEY_ENTER)) {
+			Start(); 
+		}
 
 	
 
