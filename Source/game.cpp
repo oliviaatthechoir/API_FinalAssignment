@@ -299,17 +299,15 @@ void Game::Render()
 		//background render LEAVE THIS AT TOP
 		background.Render();
 
-		
-		DrawText(TextFormat("Score: %i", score), 50, 20, 40, YELLOW);
 		DrawText(TextFormat("Lives: %i", player.lives), 50, 70, 40, YELLOW);
 
 		//player rendering 
 		player.Render(resources.shipTextures[player.activeTexture]);
 
 		//projectile rendering
-		for (int i = 0; i < Projectiles.size(); i++)
+		for (auto const& projectile : Projectiles)
 		{
-			Projectiles[i].Render(resources.laserTexture);
+			projectile.Render(resources.laserTexture);
 		}
 
 		// wall rendering 
@@ -323,10 +321,6 @@ void Game::Render()
 		{
 			Aliens[i].Render(resources.alienTexture);
 		}
-
-
-
-
 
 
 		break;
