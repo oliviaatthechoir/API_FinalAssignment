@@ -24,6 +24,7 @@
 #include "raylib.h"
 #include "game.h"
 
+//TODO: clean up main.cpp, doesn't need that many variables
 
 //------------------------------------------------------------------------------------
 // Program main entry point
