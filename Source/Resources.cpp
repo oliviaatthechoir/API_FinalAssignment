@@ -1,6 +1,8 @@
 #include "Resources.h"
 #include <iostream>;
 
+
+
 void Resources::Load()
 {
 	alienTexture = LoadTexture("./Assets/Alien.png");

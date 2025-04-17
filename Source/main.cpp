@@ -25,6 +25,15 @@
 #include "game.h"
 
 //TODO: clean up main.cpp, doesn't need that many variables
+//Delete all unused code (highscore, sound effects, level loading)
+//  Delete redundant code: raylib has collision code (rect rect intersection is all you need), raylib is GetRandom for random numbers, 
+//TODO: move each strut / class into a separate file (physical structure). Just header file is fine
+//TOOD: use RAII for all resources (texture)
+//TODO: simplify all implementations. use range-for, algoritms (erase_if)
+//      reduce nesting, dont use type flags ("is_enemy_bullet") just keep two separate list of projectiles, one for player, one for alien shots)
+//TODO:     make sure you catch your exception! try / catch can go in main, a clean exit is fine. A crash is not. 
+
+
 
 //------------------------------------------------------------------------------------
 // Program main entry point
@@ -40,7 +49,7 @@ int main(void)
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 
-    Game game = { State::STARTSCREEN };
+    Game game;
     Resources resources;
     game.resources = resources;
     game.Launch();

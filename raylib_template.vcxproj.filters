@@ -38,7 +38,7 @@
     <ClInclude Include="level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextureResource.h">
+    <ClInclude Include="Source\TextureResource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include <vector>
 #include "Resources.h"
+#include "TextureResource.h"
 #include <string>
 
 //TODO: seperate functionalities here 
@@ -127,6 +128,12 @@ struct Background
 
 struct Game
 {
+
+	//TODO: an example of how to use RAII to make safe use of resources as a members. Either everything loads and initializes correctly or Game will never construct.
+	TextureResource alien = TextureResource("./Assets/Alien.png"); 
+
+	
+
 	// Gamestate
 	State gameState = {};
 
@@ -163,13 +170,6 @@ struct Game
 	void SpawnAliens();
 
 	bool CheckCollision(Vector2 circlePos, float circleRadius, Vector2 lineTop, Vector2 lineBottom) const;
-
-	bool CheckNewHighScore();
-
-	void InsertNewHighScore(const std::string_view& name);
-
-	void LoadLeaderboard() const;
-	void SaveLeaderboard() const;
 
 
 	// Entity Storage and Resources
