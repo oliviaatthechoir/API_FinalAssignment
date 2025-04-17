@@ -22,11 +22,6 @@ enum struct EntityType
 	ENEMY_PROJECTILE
 };
 
-struct PlayerData
-{
-	std::string name;
-	int score;
-};
 
 struct Player
 {
@@ -182,8 +177,6 @@ struct Game
 	std::vector<Wall> Walls;
 
 	std::vector<Alien> Aliens;
-
-	std::vector<PlayerData> Leaderboard = { {"Player 1", 500}, {"Player 2", 400}, {"Player 3", 300}, {"Player 4", 200}, {"Player 5", 100} };
 	
 	Background background;
 
