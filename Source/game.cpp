@@ -311,9 +311,9 @@ void Game::Render()
 		}
 
 		// wall rendering 
-		for (int i = 0; i < Walls.size(); i++)
+		for (auto const& wall : Walls)
 		{
-			Walls[i].Render(resources.barrierTexture); 
+			wall.Render(resources.barrierTexture); 
 		}
 
 		//alien rendering  
