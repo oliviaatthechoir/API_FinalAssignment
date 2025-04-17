@@ -1,4 +1,5 @@
 #include "Resources.h"
+#include "TextureResource.h"
 #include <iostream>;
 
 void Resources::Load()
