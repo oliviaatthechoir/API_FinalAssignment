@@ -1,6 +1,8 @@
 #pragma once
 #include "raylib.h"
 #include "vector"
+#include <algorithm>
+#include <memory>
 
 
 struct Resources 
