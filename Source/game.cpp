@@ -140,8 +140,8 @@ void Game::Update()
 
 
 		// Update background with offset
-		playerPos = { player.x_pos, (float)player.player_base_height };
-		cornerPos = { 0, (float)player.player_base_height };
+		playerPos = { player.x_pos, player.player_base_height };
+		cornerPos = { 0, player.player_base_height };
 		offset = lineLength(playerPos, cornerPos) * -1;
 		background.Update(offset / 15);
 
