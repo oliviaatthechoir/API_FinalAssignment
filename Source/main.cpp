@@ -26,7 +26,6 @@
 
 //TODO: clean up main.cpp, doesn't need that many variables
 //  Delete redundant code: raylib has collision code (rect rect intersection is all you need), raylib is GetRandom for random numbers, 
-//TODO: move each strut / class into a separate file (physical structure). Just header file is fine
 //TOOD: use RAII for all resources (texture)
 //TODO: simplify all implementations. use range-for, algoritms (erase_if)
 //      reduce nesting, dont use type flags ("is_enemy_bullet") just keep two separate list of projectiles, one for player, one for alien shots)
