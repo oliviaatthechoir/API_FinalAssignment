@@ -11,12 +11,10 @@ void Wall::Update() {
 }
 
 void Wall::Render(Texture2D texture) const {
-    // Draw the wall sprite
     DrawTexture(texture, static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 
-    // Draw the health number inside the wall
     const char* text = TextFormat("%i", std::max(0, health));
-    int fontSize = 28; // better size for inside display
+    int fontSize = 24; 
     int textWidth = MeasureText(text, fontSize);
 
     auto textX = static_cast<int>(position.x + size.x / 2 - static_cast<float>(textWidth) / static_cast<float>(2));
