@@ -1,4 +1,4 @@
-#include "game.h"
+﻿#include "game.h"
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -16,19 +16,23 @@ const Background bg(100);
 
 void Game::Start()
 {
-	// creating walls 
-	auto window_width = (float)GetScreenWidth(); 
-	auto window_height = (float)GetScreenHeight(); 
-	float wall_distance = window_width / (wallCount + 1); 
-	for (int i = 0; i < wallCount; i++)
-	{
-		Wall newWalls;
-		newWalls.position.y = window_height - 250; 
-		newWalls.position.x = wall_distance * (i + 1); 
+	int wallCount = 5;
+	auto screenWidth = static_cast<float>(GetScreenWidth());
+	float wallY = GetScreenHeight() - 240.0f; // place above player
 
-		Walls.push_back(newWalls); 
+	float wallWidth = 100.0f; // match the actual wall size you're using
+	float totalSpacing = screenWidth - wallCount * wallWidth;
+	float gap = totalSpacing / (wallCount + 1) - 30.0f; // ⬅️ manual left shift
 
+
+
+	Walls.clear();
+	for (int i = 0; i < wallCount; ++i) {
+		float x = gap + (gap + wallWidth) * i;
+		Vector2 pos = { x, wallY };
+		Walls.emplace_back(pos);
 	}
+
 
 
 	//creating player
@@ -236,40 +240,10 @@ void Game::SpawnAliens()
 }
 
 
-void Wall::Render(Texture2D texture) const 
-{
-	DrawTexturePro(texture,
-		{
-			0,
-			0,
-			704,
-			704,
-		},
-		{
-			position.x,
-			position.y,
-			200,
-			200,
-		}, { 100 , 100 },
-		0,
-		WHITE);
 
 
-	DrawText(TextFormat("%i", health), position.x-21, position.y+10, 40, RED);
-	
-}
-
-void Wall::Update() 
-{
-
-	// set walls as inactive when out of health
-	if (health < 1)
-	{
-		active = false;
-	}
 
 
-}
 
 
 
