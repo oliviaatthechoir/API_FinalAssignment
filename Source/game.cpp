@@ -8,6 +8,8 @@
 
 //TODO: seperate functionalities here 
 
+Background bg(100);
+
 
 // MATH FUNCTIONS
 float lineLength(Vector2 A, Vector2 B) //Uses pythagoras to calculate the length of a line
@@ -48,6 +50,7 @@ void Game::Start()
 
 	}
 
+	
 
 	//creating player
 	Player newPlayer;
@@ -103,6 +106,9 @@ void Game::Update()
 			End();
 		}
 
+		//float backgroundOffset = GetTime() * 20.0f;
+		//bg.Update(backgroundOffset);
+
 		//Update Player
 		player.Update();
 		
@@ -111,7 +117,7 @@ void Game::Update()
 		{
 			alien.Update(); 
 
-			if (alien.position.y > GetScreenHeight() - player.player_base_height) 
+			if (alien.position.y >  GetScreenHeight() - player.player_base_height) 
 			{
 				End();
 			}
@@ -134,7 +140,7 @@ void Game::Update()
 		playerPos = { player.x_pos, player.player_base_height };
 		cornerPos = { 0, player.player_base_height };
 		offset = lineLength(playerPos, cornerPos) * -1;
-		background.Update(offset / 15);
+		
 
 
 		//UPDATE PROJECTILE
@@ -289,8 +295,8 @@ void Game::Render()
 
 		break;
 	case State::GAMEPLAY:
-		//background render
-		background.Render();
+		
+		bg.Render();
 
 		DrawText(TextFormat("Lives: %i", player.lives), 50, 70, 40, YELLOW);
 
@@ -491,7 +497,7 @@ void Player::Render(Texture2D texture) const
 
 void Projectile::Update()
 {
-	position.y -= speed;
+	position.y -= static_cast<float>(speed);
 
 	// UPDATE LINE POSITION
 	lineStart.y = position.y - 15;
@@ -607,23 +613,10 @@ void Alien::Render(Texture2D texture) const
 }
 
 
-//BACKGROUND
-void Star::Update(float starOffset)
-{
-	position.x = initPosition.x + starOffset;
-	position.y = initPosition.y;
 
-}
 
-static void DrawCircle(Vector2 pos, int size, Color c) noexcept {
-	DrawCircle(static_cast<int>(pos.x), static_cast<int>(pos.y), size, c);
-}
 
-//TODO: make this const noexcept later?
-void Star::Render() const 
-{
-	DrawCircle(position, size, color);
-}
+
 
 
 

@@ -152,8 +152,8 @@ struct Game
 	std::vector<Wall> Walls;
 
 	std::vector<Alien> Aliens;
-	
-	Background background;
+
+	Background bg = Background(100);
 
 
 
