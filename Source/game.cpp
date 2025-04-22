@@ -7,7 +7,7 @@
 #include <fstream>
 #include "Player.h"
 
-//TODO: seperate functionalities here 
+//TODO: seperate functionalities here
 
 const Background bg(100);
 
