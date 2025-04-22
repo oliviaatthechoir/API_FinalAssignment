@@ -19,8 +19,8 @@ void Wall::Render(Texture2D texture) const {
     int fontSize = 28; // better size for inside display
     int textWidth = MeasureText(text, fontSize);
 
-    int textX = static_cast<int>(position.x + size.x / 2 - textWidth / 2);
-    int textY = static_cast<int>(position.y + size.y / 2 - 24 / 2 + 4);
+    auto textX = static_cast<int>(position.x + size.x / 2 - static_cast<float>(textWidth) / static_cast<float>(2));
+    auto textY = static_cast<int>(position.y + size.y / 2 - 24 / 2 + 4);
 
 
     DrawText(text, textX, textY, fontSize, RED);

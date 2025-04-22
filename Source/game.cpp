@@ -18,11 +18,11 @@ void Game::Start()
 {
 	int wallCount = 5;
 	auto screenWidth = static_cast<float>(GetScreenWidth());
-	float wallY = GetScreenHeight() - 340.0f; // place above player
+	float wallY = static_cast<float>(GetScreenHeight()) - 340.0f; // place above player
 
 	float wallWidth = 100.0f; // match the actual wall size you're using
-	float totalSpacing = screenWidth - wallCount * wallWidth;
-	float gap = totalSpacing / (wallCount + 1) - 30.0f; // ⬅️ manual left shift
+	float totalSpacing = screenWidth - static_cast<float>(wallCount) * wallWidth;
+	float gap = totalSpacing / static_cast<float>(wallCount + 1) - 30.0f; // ⬅️ manual left shift
 
 
 
