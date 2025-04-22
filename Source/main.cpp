@@ -25,7 +25,6 @@
 #include "game.h"
 
 //TODO: clean up main.cpp, doesn't need that many variables
-//Delete all unused code (highscore, sound effects, level loading)
 //  Delete redundant code: raylib has collision code (rect rect intersection is all you need), raylib is GetRandom for random numbers, 
 //TODO: move each strut / class into a separate file (physical structure). Just header file is fine
 //TOOD: use RAII for all resources (texture)
