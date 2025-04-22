@@ -9,3 +9,4 @@ public:
 	void Update(); 
 	void Render(Texture2D texture) const; 
 };
+
