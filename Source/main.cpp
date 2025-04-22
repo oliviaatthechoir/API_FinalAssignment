@@ -27,8 +27,6 @@
 //TODO: clean up main.cpp, doesn't need that many variables
 //  Delete redundant code: raylib has collision code (rect rect intersection is all you need), raylib is GetRandom for random numbers, 
 //TOOD: use RAII for all resources (texture)
-//TODO: simplify all implementations. use range-for, algoritms (erase_if)
-//      reduce nesting, dont use type flags ("is_enemy_bullet") just keep two separate list of projectiles, one for player, one for alien shots)
 //TODO:     make sure you catch your exception! try / catch can go in main, a clean exit is fine. A crash is not. 
 
 
