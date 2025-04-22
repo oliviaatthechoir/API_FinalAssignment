@@ -6,6 +6,7 @@
 #include "Background.h"
 #include "Player.h"
 #include "Projectile.h"
+#include "Alien.h"
 #include <string>
 
 //TODO: seperate functionalities here 
@@ -33,24 +34,7 @@ public:
 	void Update(); 
 };
 
-struct Alien
-{
-public:
-	
-	Color color = WHITE; 
-	Vector2 position = {0, 0};
-	int x = 0; 
-	int y = 0; 
-	float radius = 30;
-	bool active = true;  
-	bool moveRight = true; 
 
-
-	int speed = 2; 
-		 
-	void Update(); 
-	void Render(Texture2D texture) const; 
-};
 
 
 struct Game
@@ -69,13 +53,12 @@ struct Game
 	//Aliens shooting
 	float shootTimer = 0;
 
+
+	//Alien formation data! 
 	int formationWidth = 8;
 	int formationHeight = 5;
 	int alienSpacing = 80;
-	int formationX = 100;
-	int formationY = 50;
-
-	bool newHighScore = false;
+	Vector2 alienOrigin = { 450, 50 }; 
 	
 
 	void Start();
@@ -88,8 +71,6 @@ struct Game
 	void Render();
 
 	void SpawnAliens();
-
-	bool CheckCollision(Vector2 circlePos, float circleRadius, Vector2 lineTop, Vector2 lineBottom) const;
 
 
 	// Entity Storage and Resources

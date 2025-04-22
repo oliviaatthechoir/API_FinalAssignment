@@ -5,34 +5,13 @@
 #include <thread>
 #include <fstream>
 #include "Utilities.h"
+#include "Alien.h"
 
 
 //TODO: seperate functionalities here
 
 const Background bg(100);
 
-
-//// MATH FUNCTIONS
-//float lineLength(Vector2 A, Vector2 B) //Uses pythagoras to calculate the length of a line
-//{
-//	float length = sqrtf(pow(B.x - A.x, 2) + pow(B.y - A.y, 2));
-//
-//	return length;
-//}
-//
-//bool pointInCircle(Vector2 circlePos, float radius, Vector2 point) // Uses pythagoras to calculate if a point is within a circle or not
-//{
-//	float distanceToCentre = lineLength(circlePos, point);
-//
-//	if (distanceToCentre < radius)
-//	{
-//		return true;
-//	}
-//	else
-//	{
-//		return false;
-//	}
-//}
 
 
 void Game::Start()
@@ -148,28 +127,28 @@ void Game::Update()
 		//}
 
 
-		for (auto it = Aliens.begin(); it != Aliens.end(); )
-		{
-			if (!it->active)
-			{
-				it = Aliens.erase(it); 
-			}
-			else
-			{
-				++it; 
-			}
-		}
-		for (auto it = Walls.begin(); it != Walls.end(); )
-		{
-			if (!it->active)
-			{
-				it = Walls.erase(it); 
-			}
-			else
-			{
-				++it; 
-			}
-		}
+		//for (auto it = Aliens.begin(); it != Aliens.end(); )
+		//{
+		//	if (!it->active)
+		//	{
+		//		it = Aliens.erase(it); 
+		//	}
+		//	else
+		//	{
+		//		++it; 
+		//	}
+		//}
+		//for (auto it = Walls.begin(); it != Walls.end(); )
+		//{
+		//	if (!it->active)
+		//	{
+		//		it = Walls.erase(it); 
+		//	}
+		//	else
+		//	{
+		//		++it; 
+		//	}
+		//}
 
 
 	break;
@@ -240,21 +219,21 @@ void Game::Render()
 
 void Game::SpawnAliens()
 {
-	for (int row = 0; row < formationHeight; row++) {
-		for (int col = 0; col < formationWidth; col++) {
-			auto newAlien = Alien();
-			newAlien.active = true;
-			newAlien.position.x = formationX + 450 + (col * alienSpacing);
-			newAlien.position.y = formationY + (row * alienSpacing);
-			Aliens.push_back(newAlien);
-			std::cout << "Find Alien -X:" << newAlien.position.x << std::endl;
-			std::cout << "Find Alien -Y:" << newAlien.position.y << std::endl;
+	Aliens.clear(); 
+
+	for (int row = 0; row < formationHeight; ++row) {
+		for (int col = 0; col < formationWidth; ++col) {
+			Vector2 position = {
+				alienOrigin.x + (col * alienSpacing),
+				alienOrigin.y + (row * alienSpacing)
+			}; 
+			Aliens.emplace_back(position);
+			std::cout << "Find Alien -X:" << position.x << std::endl;
+			std::cout << "Find Alien -Y:" << position.y << std::endl;
 		}
 	}
 
 }
-
-
 
 
 void Wall::Render(Texture2D texture) const 
@@ -292,51 +271,9 @@ void Wall::Update()
 
 }
 
-void Alien::Update() 
-{
-	int window_width = GetScreenWidth(); 
 
-	if (moveRight)
-	{
-		position.x += speed; 
 
-		if (position.x >= GetScreenWidth())
-		{
-			moveRight = false; 
-			position.y += 50; 
-		}
-	}
-	else 
-	{
-		position.x -= speed; 
 
-		if (position.x <= 0)
-		{
-			moveRight = true; 
-			position.y += 50; 
-		}
-	}
-}
-
-void Alien::Render(Texture2D texture) const 
-{
-	//TODO: scale the asset on the HD instead, and use the simpler DrawTexture call. just three arguments; texture, position, color. no scaling needed. 
-	DrawTexturePro(texture,
-		{
-			0,
-			0,
-			352,
-			352,
-		},
-		{
-			position.x,
-			position.y,
-			100,
-			100,
-		}, {50 , 50},
-		0,
-		WHITE);
-}
 
 
 
