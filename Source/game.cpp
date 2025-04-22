@@ -5,10 +5,11 @@
 #include <chrono>
 #include <thread>
 #include <fstream>
+#include "Player.h"
 
 //TODO: seperate functionalities here 
 
-Background bg(100);
+const Background bg(100);
 
 
 // MATH FUNCTIONS
@@ -53,9 +54,9 @@ void Game::Start()
 	
 
 	//creating player
-	Player newPlayer;
-	player = newPlayer;
-	player.Initialize();
+	player = Player(Vector2{ GetScreenWidth() / 2.0f, static_cast<float>(GetScreenHeight()) - 100 });
+
+
 
 	//creating aliens
 	SpawnAliens();
@@ -117,7 +118,7 @@ void Game::Update()
 		{
 			alien.Update(); 
 
-			if (alien.position.y >  GetScreenHeight() - player.player_base_height) 
+			if (alien.position.y >  GetScreenHeight()) 
 			{
 				End();
 			}
@@ -136,10 +137,9 @@ void Game::Update()
 		}
 
 
-		// Update background with offset
-		playerPos = { player.x_pos, player.player_base_height };
-		cornerPos = { 0, player.player_base_height };
-		offset = lineLength(playerPos, cornerPos) * -1;
+		
+		//cornerPos = { 0, player};
+		//offset = lineLength(playerPos, cornerPos) * -1;
 		
 
 
@@ -172,19 +172,19 @@ void Game::Update()
 				}
 			}
 
-			//ENEMY PROJECTILES HERE
-			for (auto& projectile : Projectiles)
-			{
-				if (projectile.type == EntityType::ENEMY_PROJECTILE)
-				{
-					if (CheckCollision({player.x_pos, GetScreenHeight() - player.player_base_height }, player.radius, projectile.lineStart, projectile.lineEnd))
-					{
-						std::cout << "dead!\n"; 
-						projectile.active = false; 
-						player.lives -= 1; 
-					}
-				}
-			}
+			////ENEMY PROJECTILES HERE
+			//for (auto& projectile : Projectiles)
+			//{
+			//	if (projectile.type == EntityType::ENEMY_PROJECTILE)
+			//	{
+			//		if (CheckCollision({player.x_pos, GetScreenHeight() - player.player_base_height }, player.radius, projectile.lineStart, projectile.lineEnd))
+			//		{
+			//			std::cout << "dead!\n"; 
+			//			projectile.active = false; 
+			//			player.lives -= 1; 
+			//		}
+			//	}
+			//}
 
 
 			for (auto& wall : Walls)
@@ -205,7 +205,7 @@ void Game::Update()
 		{
 			float window_height = (float)GetScreenHeight();
 			Projectile newProjectile;
-			newProjectile.position.x = player.x_pos;
+			//newProjectile.position.x = player.x_pos;
 			newProjectile.position.y = window_height - 130;
 			newProjectile.type = EntityType::PLAYER_PROJECTILE;
 			Projectiles.push_back(newProjectile);
@@ -419,78 +419,6 @@ bool Game::CheckCollision(Vector2 circlePos, float circleRadius, Vector2 lineSta
 		return false;
 	}
 
-}
-
-void Player::Initialize() 
-{
-	
-	auto window_width = (float)GetScreenWidth();
-	x_pos = window_width / 2;
-	std::cout<< "Find Player -X:" << GetScreenWidth() / 2 << "Find Player -Y" << GetScreenHeight() - player_base_height << std::endl;
-
-}
-
-void Player::Update() 
-{
-
-	//Movement
-	direction = 0;
-	if (IsKeyDown(KEY_LEFT))
-	{
-		direction--;
-	}
-	if (IsKeyDown(KEY_RIGHT))
-	{
-		direction++;
-	}
-
-	x_pos += speed * direction;
-
-	if (x_pos < 0 + radius)
-	{
-		x_pos = 0 + radius;
-	}
-	else if (x_pos > GetScreenWidth() - radius)
-	{
-		x_pos = GetScreenWidth() - radius;
-	}
-
-
-	//Determine frame for animation
-	timer += GetFrameTime();
-
-	if (timer > 0.4 && activeTexture == 2)
-	{
-		activeTexture = 0;
-		timer = 0;
-	}
-	else if (timer > 0.4)
-	{
-		activeTexture++;
-		timer = 0;
-	}
-
-	
-}
-
-void Player::Render(Texture2D texture) const 
-{
-	float window_height = GetScreenHeight(); 
-
-	DrawTexturePro(texture,
-		{
-			0,
-			0,
-			352,
-			352,
-		},
-		{
-			x_pos, window_height - player_base_height,
-			100,
-			100,
-		}, { 50, 50 },
-		0,
-		WHITE);
 }
 
 

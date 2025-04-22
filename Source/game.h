@@ -4,6 +4,7 @@
 #include "Resources.h"
 #include "TextureResource.h"
 #include "Background.h"
+#include "Player.h"
 #include <string>
 
 //TODO: seperate functionalities here 
@@ -23,27 +24,6 @@ enum struct EntityType
 	ENEMY_PROJECTILE
 };
 
-
-struct Player
-{
-public:
-
-	float x_pos = 0;
-	float speed = 7;
-	float player_base_height = 70.0f;  
-	float radius = 50;
-	int lives = 3;
-	int direction = 0;
-	int activeTexture = 0;
-	float timer = 0;
-
-	EntityType type = EntityType::PLAYER;
-
-	void Initialize();
-	void Render(Texture2D texture) const;
-	void Update();
-	
-};
 
 
 struct Projectile
@@ -116,9 +96,6 @@ struct Game
 	//Aliens shooting
 	float shootTimer = 0;
 
-	//Aliens stuff? (idk cause liv wrote this)
-	Rectangle rec = { 0, 0 ,0 ,0 }; 
-
 	int formationWidth = 8;
 	int formationHeight = 5;
 	int alienSpacing = 80;
@@ -145,7 +122,7 @@ struct Game
 	// Entity Storage and Resources
 	Resources resources;
 
-	Player player;
+	Player player; 
 
 	std::vector<Projectile> Projectiles;
 
@@ -156,8 +133,6 @@ struct Game
 	Background bg = Background(100);
 
 
-
-	Vector2 playerPos;
 	Vector2 alienPos; 
 	Vector2 cornerPos;
 	float offset;
