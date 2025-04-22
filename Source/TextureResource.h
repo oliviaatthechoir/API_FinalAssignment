@@ -32,8 +32,7 @@ public:
 		return *this; 
 	}
 
-	//TODO: = delete; copy constructors
-	//TODO: define or delete move constructors 
+	
 
 	
 	const Texture2D& Get() const noexcept { return texture; }

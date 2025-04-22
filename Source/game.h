@@ -26,6 +26,7 @@ struct Game
 	TextureResource alien = TextureResource("./Assets/Alien.png"); 
 
 
+
 	// Gamestate
 	State gameState = {};
 
