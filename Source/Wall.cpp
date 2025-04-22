@@ -1,6 +1,9 @@
 #include "raylib.h"
 #include "Wall.h"
+#include "Utilities.h"
 #include <utility>
+#include <string>
+#include <format>
 
 Wall::Wall(Vector2 pos) : Entity(pos, {0, 0}, {200, 200}) {}
 
@@ -13,13 +16,12 @@ void Wall::Update() {
 void Wall::Render(Texture2D texture) const {
     DrawTexture(texture, static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 
-    const char* text = TextFormat("%i", std::max(0, health));
-    int fontSize = 24; 
-    int textWidth = MeasureText(text, fontSize);
+    int fontSize = 24;
+    std::string text = std::format("{}", std::max(0, health));
+    int textWidth = MeasureText(text.c_str(), fontSize); // still needed for width
 
-    auto textX = static_cast<int>(position.x + size.x / 2 - static_cast<float>(textWidth) / static_cast<float>(2));
-    auto textY = static_cast<int>(position.y + size.y / 2 - 24 / 2 + 4);
+    auto textX = static_cast<int>(position.x + size.x / 2 - static_cast<float>(textWidth) / 2);
+    auto textY = static_cast<int>(position.y + size.y / 2 - static_cast<float>(fontSize) / 2 + 4);
 
-
-    DrawText(text, textX, textY, fontSize, RED);
+    DrawTextCpp(text, textX, textY, fontSize, RED);
 }
