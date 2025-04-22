@@ -4,6 +4,7 @@
 #include <chrono>
 #include <thread>
 #include <fstream>
+#include <algorithm>
 #include "Utilities.h"
 #include "Alien.h"
 
@@ -16,6 +17,7 @@ const Background bg(100);
 
 void Game::Start()
 {
+	//creating walls 
 	int wallCount = 5;
 	auto screenWidth = static_cast<float>(GetScreenWidth());
 	float wallY = static_cast<float>(GetScreenHeight()) - 340.0f; // place above player
@@ -25,14 +27,12 @@ void Game::Start()
 	float gap = totalSpacing / static_cast<float>(wallCount + 1) - 30.0f; // ⬅️ manual left shift
 
 
-
 	Walls.clear();
 	for (int i = 0; i < wallCount; ++i) {
 		float x = gap + (gap + wallWidth) * i;
 		Vector2 pos = { x, wallY };
 		Walls.emplace_back(pos);
 	}
-
 
 
 	//creating player
@@ -115,44 +115,67 @@ void Game::Update()
 			SpawnAliens();
 		}
 
-		////create projectile! 
-		//if (IsKeyPressed(KEY_SPACE)) {
-		//	Vector2 spawnPos = { player.position.x + player.size.x / 2, player.position.y };
-		//	Projectiles.push_back(Projectile(spawnPos, { 0, -15.0f }));
-		//}
+		for (auto& projectile : Projectiles) {
+			projectile.Update(); 
+		}
 
-		//shootTimer++; 
-		//if (shootTimer > 59 && !Aliens.empty()) {
-		//	int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1);
-		//	Vector2 spawnPos = Aliens[idx].position; 
-		//	spawnPos.y += Aliens[idx].size.y; 
-		//	Projectiles.push_back(Projectile(spawnPos, { 0, 15.0f }));
-		//	shootTimer = 0;
-		//}
+		// creating projectiles
+		if (IsKeyPressed(KEY_SPACE)) {
+			Vector2 spawn = { player.position.x + player.size.x / 2 - 5,
+			player.position.y }; 
 
+			Vector2 velocity = { 0, -8 }; 
+			Projectiles.emplace_back(spawn, velocity); 
+		}
 
-		//for (auto it = Aliens.begin(); it != Aliens.end(); )
-		//{
-		//	if (!it->active)
-		//	{
-		//		it = Aliens.erase(it); 
-		//	}
-		//	else
-		//	{
-		//		++it; 
-		//	}
-		//}
-		//for (auto it = Walls.begin(); it != Walls.end(); )
-		//{
-		//	if (!it->active)
-		//	{
-		//		it = Walls.erase(it); 
-		//	}
-		//	else
-		//	{
-		//		++it; 
-		//	}
-		//}
+		if (++shootTimer >= shootInterval && !Aliens.empty()) {
+			shootTimer = 0; 
+			int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1); 
+			const Alien& shooter = Aliens[idx]; 
+			Vector2 spawnPos = {
+				shooter.position.x + shooter.size.x / 2 - 5,
+				shooter.position.y + shooter.size.y
+			}; 
+
+			Vector2 vel = { 0, 6 }; 
+			Projectiles.emplace_back(spawnPos, vel); 
+
+		}
+
+		//AABB!!!
+		for (auto& projectile : Projectiles)
+		{
+			if (projectile.velocity.y < 0) {
+				for (auto& alien : Aliens)
+				{
+					if (AABB(projectile, alien)) {
+						alien.active = false; 
+						projectile.active = false;
+						break; 
+					}
+				}
+			}
+
+			if (projectile.velocity.y > 0 && AABB(projectile, player)) {
+				projectile.active = false;
+				player.lives--;
+			}
+
+			for (auto& wall : Walls) {
+				if (AABB(projectile, wall)) {
+					wall.health--;
+					projectile.active = false;
+					break; 
+				}
+			}
+		}
+
+		
+
+		std::erase_if(Projectiles, [](const Projectile& p) { return !p.active; });
+
+		std::erase_if(Aliens, [](const Alien& a) {return !a.active;  }); 
+		std::erase_if(Walls, [](const Wall& w) {return !w.active;  }); 
 
 
 	break;

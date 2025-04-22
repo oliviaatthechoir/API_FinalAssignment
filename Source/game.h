@@ -29,11 +29,9 @@ struct Game
 	// Gamestate
 	State gameState = {};
 
-
-	
-
 	//Aliens shooting
-	float shootTimer = 0;
+	int shootTimer = 0;
+	int shootInterval = 60; 
 
 
 	//Alien formation data! 
