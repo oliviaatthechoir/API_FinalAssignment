@@ -12,5 +12,7 @@ public:
 
 	Entity(Vector2 pos, Vector2 vel, Vector2 size); 
 
-	void 
+	void Update(); 
+	void Render() const; 
+	Rectangle GetRect() const; 
 };
