@@ -51,13 +51,11 @@ void Game::Start()
 
 	}
 
-	
 
 	//creating player
 	player = Player(Vector2{ GetScreenWidth() / 2.0f, static_cast<float>(GetScreenHeight()) - 100 });
 
-
-
+	
 	//creating aliens
 	SpawnAliens();
 	
@@ -107,8 +105,6 @@ void Game::Update()
 			End();
 		}
 
-		//float backgroundOffset = GetTime() * 20.0f;
-		//bg.Update(backgroundOffset);
 
 		//Update Player
 		player.Update();
@@ -136,113 +132,22 @@ void Game::Update()
 			SpawnAliens();
 		}
 
+		////create projectile! 
+		//if (IsKeyPressed(KEY_SPACE)) {
+		//	Vector2 spawnPos = { player.position.x + player.size.x / 2, player.position.y };
+		//	Projectiles.push_back(Projectile(spawnPos, { 0, -15.0f }));
+		//}
 
-		
-		//cornerPos = { 0, player};
-		//offset = lineLength(playerPos, cornerPos) * -1;
-		
-
-
-		//UPDATE PROJECTILE
-		for (auto& projectile : Projectiles) {
-			projectile.Update(); 
-		}
-
-		//UPDATE WALLS
-		for (auto& wall : Walls) {
-			wall.Update(); 
-		}
-
-		//CHECK ALL COLLISONS HERE
-		for (auto& projectile : Projectiles)
-		{
-			if (projectile.type == EntityType::PLAYER_PROJECTILE)
-			{
-				for (auto& alien : Aliens)
-				{
-					if (CheckCollision(alien.position, alien.radius, projectile.lineStart, projectile.lineEnd))
-					{
-						// Kill!
-						std::cout << "Hit! \n";
-						// Set them as inactive, will be killed later
-						projectile.active = false;
-						alien.active = false;
-						
-					}
-				}
-			}
-
-			////ENEMY PROJECTILES HERE
-			//for (auto& projectile : Projectiles)
-			//{
-			//	if (projectile.type == EntityType::ENEMY_PROJECTILE)
-			//	{
-			//		if (CheckCollision({player.x_pos, GetScreenHeight() - player.player_base_height }, player.radius, projectile.lineStart, projectile.lineEnd))
-			//		{
-			//			std::cout << "dead!\n"; 
-			//			projectile.active = false; 
-			//			player.lives -= 1; 
-			//		}
-			//	}
-			//}
+		//shootTimer++; 
+		//if (shootTimer > 59 && !Aliens.empty()) {
+		//	int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1);
+		//	Vector2 spawnPos = Aliens[idx].position; 
+		//	spawnPos.y += Aliens[idx].size.y; 
+		//	Projectiles.push_back(Projectile(spawnPos, { 0, 15.0f }));
+		//	shootTimer = 0;
+		//}
 
 
-			for (auto& wall : Walls)
-			{
-				if (CheckCollision(wall.position, wall.radius, projectile.lineStart, projectile.lineEnd))
-				{
-					// Kill!
-					std::cout << "Hit! \n";
-					// Set them as inactive, will be killed later
-					projectile.active = false;
-					wall.health -= 1;
-				}
-			}
-		}
-
-		//MAKE PROJECTILE
-		if (IsKeyPressed(KEY_SPACE))
-		{
-			float window_height = (float)GetScreenHeight();
-			Projectile newProjectile;
-			//newProjectile.position.x = player.x_pos;
-			newProjectile.position.y = window_height - 130;
-			newProjectile.type = EntityType::PLAYER_PROJECTILE;
-			Projectiles.push_back(newProjectile);
-		}
-
-		//Aliens Shooting
-		shootTimer += 1;
-		if (shootTimer > 59) //once per second
-		{
-			int randomAlienIndex = 0;
-
-			if (Aliens.size() > 1)
-			{
-				randomAlienIndex = rand() % Aliens.size();
-			}
-
-			Projectile newProjectile;
-			newProjectile.position = Aliens[randomAlienIndex].position;
-			newProjectile.position.y += 40;
-			newProjectile.speed = -15;
-			newProjectile.type = EntityType::ENEMY_PROJECTILE;
-			Projectiles.push_back(newProjectile);
-			shootTimer = 0;
-		}
-
-		// REMOVE INACTIVE/DEAD ENITITIES
-		for (auto it = Projectiles.begin(); it != Projectiles.end(); )
-		{
-			if (!it->active)
-			{
-				it = Projectiles.erase(it); 
-			}
-			else
-			{
-				++it; 
-			}
-		}
 		for (auto it = Aliens.begin(); it != Aliens.end(); )
 		{
 			if (!it->active)
@@ -351,113 +256,6 @@ void Game::SpawnAliens()
 
 
 
-
-
-
-
-
-bool Game::CheckCollision(Vector2 circlePos, float circleRadius, Vector2 lineStart, Vector2 lineEnd) const
-{
-	// our objective is to calculate the distance between the closest point on the line to the centre of the circle, 
-	// and determine if it is shorter than the radius.
-
-	// check if either edge of line is within circle
-	if (pointInCircle(circlePos, circleRadius, lineStart) || pointInCircle(circlePos, circleRadius, lineEnd))
-	{
-		return true;
-	}
-
-	// simplify variables
-	Vector2 A = lineStart;
-	Vector2 B = lineEnd;
-	Vector2 C = circlePos;
-
-	// calculate the length of the line
-	float length = lineLength(A, B);
-	
-	// calculate the dot product
-	float dotP = (((C.x - A.x) * (B.x - A.x)) + ((C.y - A.y) * (B.y - A.y))) / pow(length, 2);
-
-	// use dot product to find closest point
-	float closestX = A.x + (dotP * (B.x - A.x));
-	float closestY = A.y + (dotP * (B.y - A.y));
-
-	//find out if coordinates are on the line.
-	// we do this by comparing the distance of the dot to the edges, with two vectors
-	// if the distance of the vectors combined is the same as the length the point is on the line
-
-	//since we are using floating points, we will allow the distance to be slightly innaccurate to create a smoother collision
-	float buffer = 0.1;
-
-	float closeToStart = lineLength(A, { closestX, closestY }); //closestX + Y compared to line Start
-	float closeToEnd = lineLength(B, { closestX, closestY });	//closestX + Y compared to line End
-
-	float closestLength = closeToStart + closeToEnd;
-
-	if (closestLength == length + buffer || closestLength == length - buffer)
-	{
-		//Point is on the line!
-
-		//Compare length between closest point and circle centre with circle radius
-
-		float closeToCentre = lineLength(A, { closestX, closestY }); //closestX + Y compared to circle centre
-
-		if (closeToCentre < circleRadius)
-		{
-			//Line is colliding with circle!
-			return true;
-		}
-		else
-		{
-			//Line is not colliding
-			return false;
-		}
-	}
-	else
-	{
-		// Point is not on the line, line is not colliding
-		return false;
-	}
-
-}
-
-
-
-void Projectile::Update()
-{
-	position.y -= static_cast<float>(speed);
-
-	// UPDATE LINE POSITION
-	lineStart.y = position.y - 15;
-	lineEnd.y   = position.y + 15;
-
-	lineStart.x = position.x;
-	lineEnd.x   = position.x;
-
-	if (position.y < 0 || position.y > 1500)
-	{
-		active = false;
-	}
-}
-
-void Projectile::Render(Texture2D texture) const 
-{
-	DrawTexturePro(texture,
-		{
-			0,
-			0,
-			176,
-			176,
-		},
-		{
-			position.x,
-			position.y,
-			50,
-			50,
-		}, { 25 , 25 },
-		0,
-		WHITE);
-}
 
 void Wall::Render(Texture2D texture) const 
 {

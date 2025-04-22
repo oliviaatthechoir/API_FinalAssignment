@@ -18,11 +18,6 @@ enum struct State
 };
 
 
-
-
-
-
-
 struct Wall 
 {
 public: 
@@ -49,8 +44,7 @@ public:
 	float radius = 30;
 	bool active = true;  
 	bool moveRight = true; 
-	
-	EntityType type = EntityType::ENEMY; 
+
 
 	int speed = 2; 
 		 
