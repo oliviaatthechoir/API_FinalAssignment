@@ -1,4 +1,5 @@
 #include "game.h"
+#include "Background.h"
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -56,11 +57,6 @@ void Game::Start()
 	//creating aliens
 	SpawnAliens();
 	
-
-	//creating background
-	Background newBackground;
-	newBackground.Initialize(600);
-	background = newBackground;
 
 	gameState = State::GAMEPLAY;
 
@@ -630,37 +626,7 @@ void Star::Render() const
 }
 
 
-void Background::Initialize(int starAmount)
-{
-	Stars.reserve(starAmount);
-	for (int i = 0; i < starAmount; i++)
-	{
-		//TODO: two-phase initialization. The constructor shoud always initialize the object fully. 
-		Star newStar;
 
-		newStar.initPosition.x = GetRandomValue(-150, GetScreenWidth() + 150);
-		newStar.initPosition.y = GetRandomValue(0, GetScreenHeight());
-
-		newStar.size = GetRandomValue(1, 4) / static_cast<float>(2);
-
-		Stars.push_back(newStar);
-
-	}
-}
-
-void Background::Update(float offset)
-{
-	for (auto& star : Stars) {
-		star.Update(offset); 
-	}	
-}
-
-void Background::Render() const 
-{
-	for (const auto& star : Stars) {
-		star.Render(); 
-	}
-}
 
 
 
