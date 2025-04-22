@@ -3,7 +3,7 @@
 #include "Entity.h"
 #include <string_view>
 
-bool AABB(const Entity& a, const Entity& b) {
+inline bool AABB(const Entity& a, const Entity& b) {
 	return CheckCollisionRecs(a.GetRect(), b.GetRect()); 
 }
 
