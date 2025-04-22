@@ -18,7 +18,7 @@ void Game::Start()
 {
 	int wallCount = 5;
 	auto screenWidth = static_cast<float>(GetScreenWidth());
-	float wallY = GetScreenHeight() - 240.0f; // place above player
+	float wallY = GetScreenHeight() - 340.0f; // place above player
 
 	float wallWidth = 100.0f; // match the actual wall size you're using
 	float totalSpacing = screenWidth - wallCount * wallWidth;
