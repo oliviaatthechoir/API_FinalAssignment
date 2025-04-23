@@ -109,11 +109,70 @@ void Game::Update()
 			End();
 		}
 
-		UpdateGameplay(); 
+		//Spawn new aliens if aliens run out
+		if (Aliens.size() < 1)
+		{
+			SpawnAliens();
+		}
+
 
 		for (auto& projectile : Projectiles) {
 			projectile.Update(); 
 		}
+
+		if (IsKeyPressed(KEY_SPACE)) {
+			Vector2 spawn = { player.position.x + player.size.x / 2 - 5,
+			player.position.y };
+
+			Vector2 velocity = { 0, -8 };
+			Projectiles.emplace_back(spawn, velocity);
+		}
+
+		if (++shootTimer >= shootInterval && !Aliens.empty()) {
+			shootTimer = 0;
+			int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1);
+			const Alien& shooter = Aliens[idx];
+			Vector2 spawnPos = {
+				shooter.position.x + shooter.size.x / 2 - 5,
+				shooter.position.y + shooter.size.y
+			};
+
+			Vector2 vel = { 0, 6 };
+			Projectiles.emplace_back(spawnPos, vel);
+
+		}
+
+		//AABB!!!
+		for (auto& projectile : Projectiles)
+		{
+			if (projectile.velocity.y < 0) {
+				for (auto& alien : Aliens)
+				{
+					if (AABB(projectile, alien)) {
+						alien.active = false;
+						projectile.active = false;
+						break;
+					}
+				}
+			}
+
+			if (projectile.velocity.y > 0 && AABB(projectile, player)) {
+				projectile.active = false;
+				player.lives--;
+			}
+
+			for (auto& wall : Walls) {
+				if (AABB(projectile, wall)) {
+					wall.health--;
+					projectile.active = false;
+					break;
+				}
+			}
+		}
+
+		std::erase_if(Projectiles, [](const Projectile& p) { return !p.active; });
+		std::erase_if(Aliens, [](const Alien& a) {return !a.active;  });
+		std::erase_if(Walls, [](const Wall& w) {return !w.active;  });
 
 
 
@@ -183,90 +242,6 @@ void Game::Render()
 	}
 }
 
-void Game::UpdateGameplay() {
-	SpawnAliens(); 
-	if (Aliens.empty()) {
-		SpawnAliens();
-	}
-
-	Input(); 
-	Cleanup(); 
-	LaserSpawn(); 
-	Collision(); 
-
-
-}
-
-void Game::Input() {
-	
-	if (IsKeyReleased(KEY_Q)) {
-		End();
-	}
-
-	if (IsKeyPressed(KEY_SPACE)) {
-		Vector2 spawn = {
-			player.position.x + player.size.x / 2 - 5,
-			player.position.y
-		};
-		Vector2 velocity = { 0, -8 };
-		Projectiles.emplace_back(spawn, velocity);
-	}
-	
-
-}
-
-void Game::Cleanup() {
-	std::erase_if(Projectiles, [](const Projectile& p) { return !p.active; });
-	std::erase_if(Aliens, [](const Alien& a) {return !a.active;  });
-	std::erase_if(Walls, [](const Wall& w) {return !w.active;  });
-}
-
-void Game::LaserSpawn() {
-
-	if (++shootTimer >= shootInterval && !Aliens.empty()) {
-		shootTimer = 0;
-		int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1);
-		const Alien& shooter = Aliens[idx];
-		Vector2 spawnPos = {
-			shooter.position.x + shooter.size.x / 2 - 5,
-			shooter.position.y + shooter.size.y
-		};
-
-		Vector2 vel = { 0, 6 };
-		Projectiles.emplace_back(spawnPos, vel);
-
-	}
-}
-
-void Game::Collision() {
-	//AABB!!!
-	for (auto& projectile : Projectiles)
-	{
-		if (projectile.velocity.y < 0) {
-			for (auto& alien : Aliens)
-			{
-				if (AABB(projectile, alien)) {
-					alien.active = false;
-					projectile.active = false;
-					break;
-				}
-			}
-		}
-
-		if (projectile.velocity.y > 0 && AABB(projectile, player)) {
-			projectile.active = false;
-			player.lives--;
-		}
-
-		for (auto& wall : Walls) {
-			if (AABB(projectile, wall)) {
-				wall.health--;
-				projectile.active = false;
-				break;
-			}
-		}
-	}
-}
 
 void Game::SpawnAliens()
 {

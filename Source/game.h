@@ -48,15 +48,7 @@ struct Game
 	void Continue();
 	void Launch();
 
-	void Update();
-	void UpdateGameplay(); 
-	void Input(); 
-	void Cleanup(); 
-	void LaserSpawn(); 
-	void Collision(); 
-	
-	 
-
+	void Update(); 
 
 	void Render();
 
