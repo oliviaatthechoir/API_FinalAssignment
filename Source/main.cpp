@@ -46,9 +46,6 @@ int main(void)
 
     Game game;
     Resources resources;
-    game.resources = resources;
-    game.Launch();
-
     
     //--------------------------------------------------------------------------------------
 
