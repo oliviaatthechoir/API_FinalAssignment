@@ -61,11 +61,6 @@ void Game::Continue()
 	gameState = State::STARTSCREEN;
 }
 
-void Game::Launch()
-{
-	//LOAD SOME RESOURCES HERE
-	resources.Load();
-}
 
 void Game::Update()
 {

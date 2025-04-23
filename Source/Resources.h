@@ -1,18 +1,17 @@
 #pragma once
 #include "raylib.h"
+#include "TextureResource.h"
 #include "vector"
-#include <algorithm>
-#include <string>
+#include <string_view>
 
 
-struct Resources 
-{
-	void Load();
-	void Unload(); 
+struct Resources {
+	Resources(); 
+	~Resources() = default; 
 
-	std::vector<Texture2D> shipTextures;
-	Texture2D alienTexture;
-	Texture2D barrierTexture;
-	Texture2D laserTexture;
+	std::vector<TextureResource> shipTextures;
+	TextureResource alienTexture;
+	TextureResource barrierTexture;
+	TextureResource laserTexture;
 
 };
