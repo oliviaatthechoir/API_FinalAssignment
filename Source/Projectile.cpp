@@ -1,7 +1,7 @@
 #include "raylib.h"
 #include "Projectile.h"
 
-Projectile::Projectile(Vector2 pos, Vector2 vel) : Entity(pos, vel, {10, 30}) {}
+Projectile::Projectile(Vector2 pos, Vector2 vel) : Entity(pos, vel, {3, 15}) {}
 
 void Projectile::Update() {
 	Entity::Update(); 

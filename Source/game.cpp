@@ -170,11 +170,11 @@ void Game::Update()
 			}
 		}
 
-		std::erase_if(Projectiles, [](const Projectile& p) { return !p.active; });
 		std::erase_if(Aliens, [](const Alien& a) {return !a.active;  });
 		std::erase_if(Walls, [](const Wall& w) {return !w.active;  });
 
 
+		std::erase_if(Projectiles, [](const Projectile& p) { return !p.active; });
 
 	break;
 	case State::ENDSCREEN:
@@ -212,10 +212,12 @@ void Game::Render()
 		//player rendering
 		player.Render(resources.shipTextures[player.activeTexture]);
 
+
 		//projectile rendering
 		for (auto const& projectile : Projectiles)
 		{
 			projectile.Render(resources.laserTexture);
+
 		}
 
 		// wall rendering 
