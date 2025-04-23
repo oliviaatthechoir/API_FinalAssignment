@@ -52,11 +52,19 @@ struct Game
 	void Launch();
 
 	void Update();
+	void UpdateGameplay(); 
+	void Input(); 
+	void Cleanup(); 
+	void LaserSpawn(); 
+	void Collision(); 
+	
+	 
+
+
 	void Render();
 
 	void SpawnAliens();
 
-	
 
 
 	// Entity Storage and Resources
