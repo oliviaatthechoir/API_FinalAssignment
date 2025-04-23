@@ -7,7 +7,7 @@ public:
 	bool moveRight = true;
 	int speed = 2; 
 
-	Alien(Vector2 pos); 
+	explicit Alien(Vector2 pos); 
 
 	void Update(); 
 	void Render(Texture2D texture) const; 
