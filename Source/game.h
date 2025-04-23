@@ -24,9 +24,6 @@ struct Game
 {
 	//TODO: an example of how to use RAII to make safe use of resources as a members. Either everything loads and initializes correctly or Game will never construct.
 	TextureResource alien = TextureResource("./Assets/Alien.png"); 
-	TextureResource laser = TextureResource("./Assets/Laser.png"); 
-	TextureResource wall = TextureResource("./Assets/Barrier.png"); 
-
 
 
 
@@ -64,7 +61,6 @@ struct Game
 	void Render();
 
 	void SpawnAliens();
-
 
 
 	// Entity Storage and Resources
