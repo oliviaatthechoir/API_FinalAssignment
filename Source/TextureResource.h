@@ -32,9 +32,7 @@ public:
 		return *this; 
 	}
 
-	
 
-	
 	const Texture2D& Get() const noexcept { return texture; }
 private:
 	Texture2D texture;
