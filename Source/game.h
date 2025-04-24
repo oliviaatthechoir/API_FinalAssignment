@@ -24,7 +24,7 @@ enum struct State
 
 class Game
 {
-	Game(); 
+	Game() noexcept; 
 
 
 	Player player;
