@@ -50,21 +50,21 @@ int main(void)
     }
     catch (const TextureLoadException& e) {
         std::cerr << "Texture load error: " << e.what() << "\n"; 
-         
+        return EXIT_FAILURE; 
     }
     catch (const std::runtime_error& e)
     {
         std::cerr << "Runtime error: " << e.what() << "\n";
-       
+        return EXIT_FAILURE;
     }
     catch (const std::exception& e)
     {
         std::cerr << "Exception: " << e.what() << "\n";
-        
+        return EXIT_FAILURE;
     }
     catch (...) {
         std::cerr << "Release me!!!!!!!!!!!!!! " << "\n";
-       
+        return EXIT_FAILURE;
     }
 
     return 0;
