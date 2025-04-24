@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "Player.h"
+#include "TextureResource.h"
 
 Player::Player(Vector2 pos) : Entity(pos, { 0, 0 }, { 100, 100 }) {}
 
@@ -21,7 +22,7 @@ void Player::Update() {
 	}
 }
 
-void Player::Render(Texture2D texture) const {
-	DrawTexture(texture, static_cast<int>(position.x), static_cast<int>(position.y), WHITE); 
+void Player::Render(const TextureResource& texture) const {
+	DrawTexture(texture.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 }
 

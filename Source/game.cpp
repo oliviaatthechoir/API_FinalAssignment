@@ -89,7 +89,7 @@ void Game::Update()
 		{
 			alien.Update(); 
 
-			if (alien.position.y >  GetScreenHeight()) 
+			if (alien.position.y > static_cast<float>(GetScreenHeight())) 
 			{
 				End();
 			}
@@ -202,26 +202,26 @@ void Game::Render()
 		DrawText(TextFormat("Lives: %i", player.lives), 50, 70, 40, YELLOW);
 
 		//player rendering
-		player.Render(resources.shipTextures[0].Get());
+		player.Render(resources.shipTextures[0]);
 
 
 		//projectile rendering
 		for (auto const& projectile : Projectiles)
 		{
-			projectile.Render(resources.laserTexture.Get());
+			projectile.Render(resources.laserTexture);
 
 		}
 
 		// wall rendering 
 		for (auto const& wall : Walls)
 		{
-			wall.Render(resources.barrierTexture.Get()); 
+			wall.Render(resources.barrierTexture); 
 		}
 
 		//alien rendering  
 		for (auto const& alien : Aliens)
 		{
-			alien.Render(resources.alienTexture.Get());
+			alien.Render(resources.alienTexture);
 		}
 
 

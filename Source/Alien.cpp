@@ -22,6 +22,6 @@ void Alien::Update() {
 	Entity::Update(); 
 }
 
-void Alien::Render(Texture2D texture) const {
-	DrawTexture(texture, static_cast<int>(position.x), static_cast<int>(position.y), WHITE); 
+void Alien::Render(const TextureResource& texture) const {
+	DrawTexture(texture.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 }

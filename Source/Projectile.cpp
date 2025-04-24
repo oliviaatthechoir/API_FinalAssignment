@@ -11,6 +11,6 @@ void Projectile::Update() {
 	}
 }
 
-void Projectile::Render(Texture2D texture) const {
-	DrawTexture(texture, static_cast<int>(position.x), static_cast<int>(position.y), WHITE); 
+void Projectile::Render(const TextureResource& texture) const {
+	DrawTexture(texture.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 }

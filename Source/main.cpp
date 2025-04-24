@@ -52,9 +52,9 @@ int main(void)
         }
         
     }
-    catch (const std::runtime_error& e)
+    catch (const TextureLoadException& e)
     {
-        std::cerr << "Fatal error: " << e.what() << "\n"; 
+        std::cerr << "Load failed: " << e.what() << "\n"; 
         CloseWindow();
         return 1; 
     }

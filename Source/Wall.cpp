@@ -13,8 +13,8 @@ void Wall::Update() {
 	}
 }
 
-void Wall::Render(Texture2D texture) const {
-    DrawTexture(texture, static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
+void Wall::Render(const TextureResource& texture) const {
+    DrawTexture(texture.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 
     int fontSize = 24;
     std::string text = std::format("{}", std::max(0, health));

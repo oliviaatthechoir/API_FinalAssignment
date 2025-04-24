@@ -22,6 +22,7 @@ enum struct State
 
 struct Game
 {
+	Game(); 
 	//TODO: an example of how to use RAII to make safe use of resources as a members. Either everything loads and initializes correctly or Game will never construct.
 	TextureResource alien = TextureResource("./Assets/Alien.png"); 
 
@@ -60,7 +61,6 @@ struct Game
 
 	Background bg = Background(100);
 
-	Game(); 
 
 	int framesCounter = 0;
 private: 

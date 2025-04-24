@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "Entity.h"
+#include "TextureResource.h"
 
 class Alien : public Entity {
 public: 
@@ -10,5 +11,5 @@ public:
 	explicit Alien(Vector2 pos); 
 
 	void Update(); 
-	void Render(Texture2D texture) const; 
+	void Render(const TextureResource& texture) const; 
 };
