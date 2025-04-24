@@ -13,6 +13,7 @@ public:
 	int direction = 0; 
 	int activeTexture = 0; 
 	float timer = 0;
+	float player_base_height = 0; 
 
 	explicit Player(Vector2 pos) noexcept; 
 

@@ -53,12 +53,13 @@ public:
 	void End() noexcept;
 	void SpawnAliens();
 	void SpawnWalls(); 
-	void CheckAnyCollisions() const noexcept; 
 	void CleanEntities(); 
+	bool CheckForGameOver() const noexcept; 
+	void CheckAnyCollisions() const noexcept; 
 
 
 	
-	void Continue(); 
+	//void Continue(); 
 	
 
 	std::vector<Projectile> Projectiles;
@@ -77,6 +78,6 @@ public:
 	void Update();
 	void Render() noexcept;
 
-	bool isGameOver() const noexcept ; 
+	bool isGameOver() const noexcept { return gameOver; }
 
 };
