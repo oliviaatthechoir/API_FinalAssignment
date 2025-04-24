@@ -32,3 +32,8 @@ void Player::Render(const TextureResource& texture) const noexcept {
 	
 }
 
+Vector2 Player::GetGunPosition() const noexcept {
+	return { position.x + size.x / 2.0f - 5.0f,
+	position.y }; 
+}
+

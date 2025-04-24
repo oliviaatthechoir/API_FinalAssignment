@@ -83,9 +83,7 @@ void Game::Update()
 		}
 
 		if (IsKeyPressed(KEY_SPACE)) {
-			Vector2 spawn = { player.position.x + player.size.x / 2 - 5,
-			player.position.y };
-
+			Vector2 spawn = player.GetGunPosition(); 
 			Vector2 velocity = { 0, -8 };
 			Projectiles.emplace_back(spawn, velocity);
 
