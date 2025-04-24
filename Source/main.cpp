@@ -20,57 +20,40 @@
 *   Copyright (c) 2013-2022 Ramon Santamaria (@raysan5)
 *
 ********************************************************************************************/
-
+#include <CodeAnalysis/Warnings.h>
+#pragma warning(push)
+#pragma warning(disable:ALL_CODE_ANALYSIS_WARNINGS)
 #include "raylib.h"
+#pragma warning(pop)
 #include "game.h"
+#include "Window.h"
 #include <iostream>
-
+#include <string_view>
+using namespace std::string_view_literals; 
 //TOOD: use RAII for all resources (texture)
 
 
 
-//------------------------------------------------------------------------------------
-// Program main entry point
-//------------------------------------------------------------------------------------
 int main(void)
-{    
-    // Initialization
-    //--------------------------------------------------------------------------------------
-    const int screenWidth = 1920;
-    const int screenHeight = 1080;
-
-    InitWindow(screenWidth, screenHeight, "SPACE INVADERS");
-
+{   
     try
     {
-        Resources resources;
+        Window window("SPACE INVADERS");
         Game game;
-        while (WindowShouldClose())
+        while (!WindowShouldClose())
         {
             game.Update();
             game.Render(); 
-        }
-        
+    
+        }        
     }
     catch (const TextureLoadException& e)
     {
-        std::cerr << "Load failed: " << e.what() << "\n"; 
-        CloseWindow();
-        return 1; 
+        std::cerr << "Load failed: " << e.what() << "\n";            
+    }//TODO: catch runtime_error and, always a good idea, std::exception and ...
+    catch (...) {
+        std::cerr << "bajs";
     }
-
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
-
-    
-    BeginDrawing();
-
-    ClearBackground(BLACK);
-
-    EndDrawing();
-   
-    
-    CloseWindow(); 
    
 
     return 0;

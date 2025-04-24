@@ -1,8 +1,12 @@
+#include <CodeAnalysis/Warnings.h>
+#pragma warning(push)
+#pragma warning(disable:ALL_CODE_ANALYSIS_WARNINGS)
 #include "raylib.h"
+#pragma warning(pop)
 #include "Player.h"
 #include "TextureResource.h"
 
-Player::Player(Vector2 pos) : Entity(pos, { 0, 0 }, { 100, 100 }) {}
+Player::Player(Vector2 pos) noexcept : Entity(pos, { 0, 0 }, { 100, 100 }) {}
 
 void Player::Update() {
 	direction = 0; 
@@ -22,7 +26,7 @@ void Player::Update() {
 	}
 }
 
-void Player::Render(const TextureResource& texture) const {
+void Player::Render(const TextureResource& texture) const noexcept {
 	DrawTexture(texture.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 }
 

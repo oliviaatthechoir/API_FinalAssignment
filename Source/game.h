@@ -1,7 +1,10 @@
+#include <CodeAnalysis/Warnings.h>
 #pragma once
+#pragma warning(push)
+#pragma warning(disable:ALL_CODE_ANALYSIS_WARNINGS)
 #include "raylib.h"
+#pragma warning(pop)
 #include <vector>
-#include "Resources.h"
 #include "TextureResource.h"
 #include "Background.h"
 #include "Player.h"
@@ -9,8 +12,7 @@
 #include "Alien.h"
 #include "Wall.h"
 #include <string>
-
-//TODO: seperate functionalities here 
+#include <array>
 
 enum struct State
 {
@@ -20,11 +22,18 @@ enum struct State
 };
 
 
-struct Game
+class Game
 {
-	Game(); 
+public: 
+	Game() noexcept; 
 	//TODO: an example of how to use RAII to make safe use of resources as a members. Either everything loads and initializes correctly or Game will never construct.
-	TextureResource alien = TextureResource("./Assets/Alien.png"); 
+	std::array<TextureResource, 3> shipTextures{
+		TextureResource{"./Assets/Ship1.png"},
+		TextureResource{"./Assets/Ship2.png"},
+		TextureResource{"./Assets/Ship3.png"} }; 
+	TextureResource alienTexture = TextureResource("./Assets/Alien.png"); 
+	TextureResource barrierTexture = TextureResource("./Assets/Barrier.png"); 
+	TextureResource laserTexture = TextureResource("./Assets/Laser.png"); 
 
 
 	// Gamestate
@@ -50,6 +59,7 @@ struct Game
 	void Render();
 
 	void SpawnAliens();
+	void CleanEntities(); 
 
 	Player player;
 
@@ -63,8 +73,8 @@ struct Game
 
 
 	int framesCounter = 0;
-private: 
-	// Entity Storage and Resources
-	Resources resources;
+
+	
+	
 
 };

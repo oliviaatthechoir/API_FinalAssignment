@@ -1,4 +1,8 @@
+#include <CodeAnalysis/Warnings.h>
+#pragma warning(push)
+#pragma warning(disable:ALL_CODE_ANALYSIS_WARNINGS)
 #include "raylib.h"
+#pragma warning(pop)
 #include "Alien.h"
 
 Alien::Alien(Vector2 pos) : Entity(pos, { 0, 0 }, { 100, 100 }) {}
@@ -22,6 +26,6 @@ void Alien::Update() {
 	Entity::Update(); 
 }
 
-void Alien::Render(const TextureResource& texture) const {
+void Alien::Render(const TextureResource& texture) const noexcept {
 	DrawTexture(texture.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 }

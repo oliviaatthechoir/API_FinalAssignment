@@ -1,4 +1,8 @@
+#include <CodeAnalysis/Warnings.h>
+#pragma warning(push)
+#pragma warning(disable:ALL_CODE_ANALYSIS_WARNINGS)
 #include "raylib.h"
+#pragma warning(pop)
 #include "Wall.h"
 #include "Utilities.h"
 #include <utility>
@@ -13,7 +17,7 @@ void Wall::Update() {
 	}
 }
 
-void Wall::Render(const TextureResource& texture) const {
+void Wall::Render(const TextureResource& texture) const noexcept {
     DrawTexture(texture.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 
     int fontSize = 24;

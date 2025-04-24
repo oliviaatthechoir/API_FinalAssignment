@@ -7,16 +7,15 @@
 #include <algorithm>
 #include "Utilities.h"
 #include "Alien.h"
+#include <cassert>
 
 
-const Background bg(100);
-
-Game::Game() : player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f }) {}
+Game::Game() noexcept : player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f }) {}
 
 void Game::Start()
 {
 	//creating walls 
-	int wallCount = 5;
+	const int wallCount = 5;
 	auto screenWidth = static_cast<float>(GetScreenWidth());
 	float wallY = static_cast<float>(GetScreenHeight()) - 340.0f; // place above player
 
@@ -26,8 +25,9 @@ void Game::Start()
 
 
 	Walls.clear();
+	Walls.reserve(wallCount);
 	for (int i = 0; i < wallCount; ++i) {
-		float x = gap + (gap + wallWidth) * i;
+		float x = gap + (gap + wallWidth) * static_cast<float>(i);
 		Vector2 pos = { x, wallY };
 		Walls.emplace_back(pos);
 	}
@@ -91,6 +91,7 @@ void Game::Update()
 			if (alien.position.y > static_cast<float>(GetScreenHeight())) 
 			{
 				End();
+				return;
 			}
 		}
 
@@ -98,6 +99,7 @@ void Game::Update()
 		if (player.lives < 1)
 		{
 			End();
+			return; //TODO: consider not repeating code. create a "doQuit" or "wantQuit" or "isGameOver" to check and bails in one place before starting the update.
 		}
 
 		//Spawn new aliens if aliens run out
@@ -121,15 +123,19 @@ void Game::Update()
 
 		if (++shootTimer >= shootInterval && !Aliens.empty()) {
 			shootTimer = 0;
-			int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1);
-			const Alien& shooter = Aliens[idx];
-			Vector2 spawnPos = {
-				shooter.position.x + shooter.size.x / 2 - 5,
-				shooter.position.y + shooter.size.y
-			};
-
-			Vector2 vel = { 0, 6 };
-			Projectiles.emplace_back(spawnPos, vel);
+			if (Aliens.size() > 0) {
+				int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1);
+				const Alien& shooter = Aliens[idx];
+				Vector2 spawnPos = { //TODO: conside rgiving player an interface for this instead. lite, Vector2 getGunPosition()
+					shooter.position.x + shooter.size.x / 2 - 5,
+					shooter.position.y + shooter.size.y
+				};
+				Vector2 vel = { 0, 6 };
+				Projectiles.emplace_back(spawnPos, vel);
+			}
+		
+			//TODO: you will probably have to suppress the GSL warning about using at() here. 
+	
 
 		}
 
@@ -161,11 +167,7 @@ void Game::Update()
 			}
 		}
 
-		std::erase_if(Aliens, [](const Alien& a) {return !a.active;  });
-		std::erase_if(Walls, [](const Wall& w) {return !w.active;  });
-
-
-		std::erase_if(Projectiles, [](const Projectile& p) { return !p.active; });
+		CleanEntities(); 
 
 	break;
 	case State::ENDSCREEN:
@@ -178,6 +180,7 @@ void Game::Update()
 		break;
 	default:
 		//SHOULD NOT HAPPEN
+		assert(false && "should not happen");
 		break;
 	}
 }
@@ -185,10 +188,13 @@ void Game::Update()
 
 void Game::Render()
 {
+	BeginDrawing();
+	ClearBackground(BLACK);
 	switch (gameState)
 	{
 	case State::STARTSCREEN:
 		//Code
+
 		DrawText("SPACE INVADERS", 200, 100, 160, YELLOW);
 
 		DrawText("PRESS SPACE TO BEGIN", 200, 350, 40, YELLOW);
@@ -201,26 +207,26 @@ void Game::Render()
 		DrawText(TextFormat("Lives: %i", player.lives), 50, 70, 40, YELLOW);
 
 		//player rendering
-		player.Render(resources.shipTextures[0]);
+		player.Render(shipTextures[0]); //TODO: always dwaring the first frame. Consider letting Player own the array isntead and decide what texture to draw each frame.
 
 
 		//projectile rendering
 		for (auto const& projectile : Projectiles)
 		{
-			projectile.Render(resources.laserTexture);
+			projectile.Render(laserTexture);
 
 		}
 
 		// wall rendering 
 		for (auto const& wall : Walls)
 		{
-			wall.Render(resources.barrierTexture); 
+			wall.Render(barrierTexture); 
 		}
 
 		//alien rendering  
 		for (auto const& alien : Aliens)
 		{
-			alien.Render(resources.alienTexture);
+			alien.Render(alienTexture);
 		}
 
 
@@ -233,6 +239,7 @@ void Game::Render()
 		
 		break;
 	}
+	EndDrawing(); 
 }
 
 
@@ -252,6 +259,13 @@ void Game::SpawnAliens()
 		}
 	}
 
+}
+
+void Game::CleanEntities() {
+	const auto isDead = [](const auto& a) noexcept {return !a.active;  };
+	std::erase_if(Aliens, isDead);
+	std::erase_if(Walls, isDead);
+	std::erase_if(Projectiles, isDead);
 }
 
 

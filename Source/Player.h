@@ -1,5 +1,9 @@
+#include <CodeAnalysis/Warnings.h>
 #pragma once
+#pragma warning(push)
+#pragma warning(disable:ALL_CODE_ANALYSIS_WARNINGS)
 #include "raylib.h"
+#pragma warning(pop)
 #include "Entity.h"
 #include "TextureResource.h"
 
@@ -10,7 +14,7 @@ public:
 	int activeTexture = 0; 
 	float timer = 0;
 
-	explicit Player(Vector2 pos); 
-	void Update(); 
-	void Render(const TextureResource& texture) const; 
+	explicit Player(Vector2 pos) noexcept; 
+	void Update();
+	void Render(const TextureResource& texture) const noexcept; 
 };

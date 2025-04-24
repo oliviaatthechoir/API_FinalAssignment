@@ -1,4 +1,8 @@
+#include <CodeAnalysis/Warnings.h>
+#pragma warning(push)
+#pragma warning(disable:ALL_CODE_ANALYSIS_WARNINGS)
 #include "raylib.h"
+#pragma warning(pop)
 #include "Background.h"
 
 Background::Background(int starAmount)
@@ -15,13 +19,13 @@ Background::Background(int starAmount)
     }
 }
 
-void Background::Update(float offset)
+void Background::Update(float offset) noexcept
 {
     for (auto& star : stars)
         star.Update(offset);
 }
 
-void Background::Render() const
+void Background::Render() const noexcept
 {
     for (const auto& star : stars)
         star.Render();

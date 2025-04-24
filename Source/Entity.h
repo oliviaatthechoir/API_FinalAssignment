@@ -1,5 +1,10 @@
+#include <CodeAnalysis/Warnings.h>
 #pragma once
+#pragma warning(push)
+#pragma warning(disable:ALL_CODE_ANALYSIS_WARNINGS)
 #include "raylib.h"
+#pragma warning(pop)
+#include "TextureResource.h"
 
 class Entity {
 public: 
@@ -8,11 +13,9 @@ public:
 	Vector2 size = { 0,0 }; 
 	bool active = true; 
 
-	Entity() = default; 
-
-	Entity(Vector2 pos, Vector2 vel, Vector2 size); 
+	Entity(Vector2 pos, Vector2 vel, Vector2 size) noexcept; 
 
 	void Update(); 
-	void Render() const; 
-	Rectangle GetRect() const; 
+	void Render(const TextureResource& texture) const noexcept; 
+	Rectangle GetRect() const noexcept; 
 };
