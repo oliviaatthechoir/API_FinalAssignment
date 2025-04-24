@@ -184,20 +184,20 @@ void Game::SpawnAliens()
 }
 
 void Game::SpawnWalls() {
-	const int wallCount = 5;
-	auto screenWidth = static_cast<float>(GetScreenWidth());
-	float wallY = static_cast<float>(GetScreenHeight()) - 340.0f;
+	constexpr int wallCount = 5;
+	const auto screenWidth = static_cast<float>(GetScreenWidth());
+	const float wallY = static_cast<float>(GetScreenHeight()) - 340.0f;
 
-	float wallWidth = 100.0f;
-	float totalSpacing = screenWidth - static_cast<float>(wallCount) * wallWidth;
-	float gap = totalSpacing / static_cast<float>(wallCount + 1) - 30.0f; 
+	constexpr float wallWidth = 100.0f;
+	const float totalSpacing = screenWidth - static_cast<float>(wallCount) * wallWidth;
+	const float gap = totalSpacing / static_cast<float>(wallCount + 1) - 30.0f; 
 
 
 	Walls.clear();
 	Walls.reserve(wallCount);
 	for (int i = 0; i < wallCount; ++i) {
-		float x = gap + (gap + wallWidth) * static_cast<float>(i);
-		Vector2 pos = { x, wallY };
+		const float x = gap + (gap + wallWidth) * static_cast<float>(i);
+		const Vector2 pos = { x, wallY };
 		Walls.emplace_back(pos);
 	}
 }
