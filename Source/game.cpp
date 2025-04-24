@@ -39,6 +39,7 @@ void Game::End() noexcept
 	Projectiles.clear();
 	Walls.clear();
 	Aliens.clear();
+	player.lives = 3;
 	gameState = State::ENDSCREEN;
 }
 
@@ -165,7 +166,7 @@ void Game::Update()
 		//Code
 	
 		if (IsKeyPressed(KEY_ENTER)) {
-			Start(); 
+			Continue(); 
 		}
 
 		break;
