@@ -1,5 +1,4 @@
-﻿#pragma warning(disable : 4996)
-#include "game.h"
+﻿#include "game.h"
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -26,29 +25,9 @@ Game::Game() noexcept
 
 void Game::Start()
 {
-	//creating walls 
-	const int wallCount = 5;
-	auto screenWidth = static_cast<float>(GetScreenWidth());
-	float wallY = static_cast<float>(GetScreenHeight()) - 340.0f; // place above player
 
-	float wallWidth = 100.0f; // match the actual wall size you're using
-	float totalSpacing = screenWidth - static_cast<float>(wallCount) * wallWidth;
-	float gap = totalSpacing / static_cast<float>(wallCount + 1) - 30.0f; // ⬅️ manual left shift
-
-
-	Walls.clear();
-	Walls.reserve(wallCount);
-	for (int i = 0; i < wallCount; ++i) {
-		float x = gap + (gap + wallWidth) * static_cast<float>(i);
-		Vector2 pos = { x, wallY };
-		Walls.emplace_back(pos);
-	}
-
-
-	
-	//creating aliens
 	SpawnAliens();
-	
+	SpawnWalls(); 
 
 	gameState = State::GAMEPLAY;
 
@@ -273,12 +252,36 @@ void Game::SpawnAliens()
 
 }
 
+void Game::SpawnWalls() {
+	const int wallCount = 5;
+	auto screenWidth = static_cast<float>(GetScreenWidth());
+	float wallY = static_cast<float>(GetScreenHeight()) - 340.0f;
+
+	float wallWidth = 100.0f;
+	float totalSpacing = screenWidth - static_cast<float>(wallCount) * wallWidth;
+	float gap = totalSpacing / static_cast<float>(wallCount + 1) - 30.0f; 
+
+
+	Walls.clear();
+	Walls.reserve(wallCount);
+	for (int i = 0; i < wallCount; ++i) {
+		float x = gap + (gap + wallWidth) * static_cast<float>(i);
+		Vector2 pos = { x, wallY };
+		Walls.emplace_back(pos);
+	}
+}
+
+void Game::CheckAnyCollisions() const noexcept {
+
+}
+
 void Game::CleanEntities() {
 	const auto isDead = [](const auto& a) noexcept {return !a.active;  };
 	std::erase_if(Aliens, isDead);
 	std::erase_if(Walls, isDead);
 	std::erase_if(Projectiles, isDead);
 }
+
 
 
 

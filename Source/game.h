@@ -24,6 +24,7 @@ enum struct State
 
 class Game
 {
+public: 
 	Game() noexcept; 
 
 
@@ -40,6 +41,7 @@ class Game
 	//Aliens shooting
 	int shootTimer = 0;
 	int shootInterval = 60; 
+	bool gameOver = false; 
 
 
 	//Alien formation data! 
@@ -50,15 +52,14 @@ class Game
 	
 	void End() noexcept;
 	void SpawnAliens();
+	void SpawnWalls(); 
+	void CheckAnyCollisions() const noexcept; 
 	void CleanEntities(); 
 
 
 	
 	void Continue(); 
 	
-
-
-
 
 	std::vector<Projectile> Projectiles;
 
@@ -71,10 +72,11 @@ class Game
 
 	int framesCounter = 0;
 
-public:
+
 	void Start();
 	void Update();
 	void Render() noexcept;
 
+	bool isGameOver() const noexcept ; 
 
 };
