@@ -35,7 +35,6 @@ void Game::Start()
 
 void Game::End() noexcept
 {
-	//SAVE SCORE AND UPDATE SCOREBOARD
 	Projectiles.clear();
 	Walls.clear();
 	Aliens.clear();
@@ -83,7 +82,16 @@ void Game::Update()
 			SpawnAliens();
 		}
 
-		SpawnWalls(); 
+		if (IsKeyPressed(KEY_SPACE)) {
+			Vector2 spawn = { player.position.x + player.size.x / 2 - 5,
+			player.position.y };
+
+			Vector2 velocity = { 0, -8 };
+			Projectiles.emplace_back(spawn, velocity);
+
+		}
+		HandleAlienProjectile(); 
+		CheckAnyCollisions(); 
 		CleanEntities(); 
 		break;
 	case State::ENDSCREEN:
@@ -193,7 +201,55 @@ void Game::SpawnWalls() {
 	}
 }
 
-void Game::CheckAnyCollisions() const noexcept {
+void Game::CheckAnyCollisions() {
+	for (auto& projectile : Projectiles)
+	{
+		if (projectile.velocity.y < 0) {
+			for (auto& alien : Aliens)
+			{
+				if (AABB(projectile, alien)) {
+					alien.active = false;
+					projectile.active = false;
+					break;
+				}
+			}
+		}
+
+		if (projectile.velocity.y > 0 && AABB(projectile, player)) {
+			projectile.active = false;
+			player.lives--;
+		}
+
+		for (auto& wall : Walls) {
+			if (AABB(projectile, wall)) {
+				std::cout << "Hit wall at position: " << wall.position.x << ", health: " << wall.health << "\n";
+				wall.health--;
+				projectile.active = false;
+				break;
+			}
+		}
+	}
+
+}
+
+void Game::HandleAlienProjectile() noexcept {
+	if (++shootTimer >= shootInterval && !Aliens.empty()) {
+		shootTimer = 0;
+		if (Aliens.empty() > 0) {
+			int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1);
+			const Alien& shooter = Aliens[idx];
+			Vector2 spawnPos = { //TODO: conside rgiving player an interface for this instead. lite, Vector2 getGunPosition()
+				shooter.position.x + shooter.size.x / 2 - 5,
+				shooter.position.y + shooter.size.y
+			};
+			Vector2 vel = { 0, 6 };
+			Projectiles.emplace_back(spawnPos, vel);
+		}
+
+		//TODO: you will probably have to suppress the GSL warning about using at() here. 
+
+
+	}
 
 }
 

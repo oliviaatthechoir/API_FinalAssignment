@@ -55,11 +55,8 @@ public:
 	void SpawnWalls(); 
 	void CleanEntities(); 
 	bool CheckForGameOver() const noexcept; 
-	void CheckAnyCollisions() const noexcept; 
-
-
-	
-	//void Continue(); 
+	void CheckAnyCollisions(); 
+	void HandleAlienProjectile() noexcept; 
 	
 
 	std::vector<Projectile> Projectiles;
