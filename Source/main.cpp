@@ -26,7 +26,6 @@
 #include <iostream>
 
 //TOOD: use RAII for all resources (texture)
-//TODO:  make sure you catch your exception! try / catch can go in main, a clean exit is fine. A crash is not. 
 
 
 
