@@ -26,10 +26,11 @@ class Game
 {
 public: 
 	Game(); 
-	TextureResource laserTexture{ "./Assets/Laser.png" };
-	TextureResource barrierTexture{ "./Assets/Barrier.png" };
-	TextureResource alienTexture{ "./Assets/Alien.png" };
-	std::array<TextureResource, 3> shipTextures; 
+	TextureResource laserTexture;
+	TextureResource barrierTexture;
+	TextureResource alienTexture;
+	std::vector<TextureResource> shipTextures;
+	Player player;
 
 
 	// Gamestate
@@ -57,7 +58,6 @@ public:
 	void SpawnAliens();
 	void CleanEntities(); 
 
-	Player player;
 
 	std::vector<Projectile> Projectiles;
 
