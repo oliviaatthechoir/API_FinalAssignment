@@ -25,10 +25,13 @@ enum struct State
 class Game
 {
 	Game(); 
-	TextureResource laserTexture{ "./Assets/Laser.png" };
-	TextureResource barrierTexture{ "./Assets/Barrier.png" };
-	TextureResource alienTexture{ "./Assets/Alien.png" };
+
+
+	Player player;
 	std::array<TextureResource, 3> shipTextures; 
+	TextureResource alienTexture{ "./Assets/Alien.png" };
+	TextureResource barrierTexture{ "./Assets/Barrier.png" };
+	TextureResource laserTexture{ "./Assets/Laser.png" };
 
 
 	// Gamestate
@@ -56,7 +59,6 @@ class Game
 
 
 
-	Player player;
 
 	std::vector<Projectile> Projectiles;
 
