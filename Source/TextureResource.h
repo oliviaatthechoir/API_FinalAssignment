@@ -20,10 +20,6 @@ public:
 		}
 	}
 
-	~TextureResource() noexcept {
-		UnloadTexture(texture);
-	}
-
 	TextureResource(const TextureResource&) = delete; 
 	TextureResource& operator=(const TextureResource&) = delete; 
 
@@ -41,6 +37,10 @@ public:
 		return *this; 
 	}
 
+
+	~TextureResource() noexcept {
+		UnloadTexture(texture);
+	}
 	
 
 	

@@ -58,7 +58,6 @@ void Game::Continue()
 
 
 
-
 void Game::Update()
 {
 	switch (gameState)
@@ -102,7 +101,7 @@ void Game::Update()
 		}
 
 		//Spawn new aliens if aliens run out
-		if (Aliens.size() < 1)
+		if (Aliens.empty())
 		{
 			SpawnAliens();
 		}
