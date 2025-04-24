@@ -25,14 +25,11 @@ enum struct State
 class Game
 {
 public: 
-	Game() noexcept; 
-	std::array<TextureResource, 3> shipTextures{
-		TextureResource{"./Assets/Ship1.png"},
-		TextureResource{"./Assets/Ship2.png"},
-		TextureResource{"./Assets/Ship3.png"} }; 
-	TextureResource alienTexture{ "./Assets/Alien.png" };
-	TextureResource barrierTexture{ "./Assets/Barrier.png" };
+	Game(); 
 	TextureResource laserTexture{ "./Assets/Laser.png" };
+	TextureResource barrierTexture{ "./Assets/Barrier.png" };
+	TextureResource alienTexture{ "./Assets/Alien.png" };
+	std::array<TextureResource, 3> shipTextures; 
 
 
 	// Gamestate

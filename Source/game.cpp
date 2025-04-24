@@ -10,7 +10,15 @@
 #include <cassert>
 
 
-Game::Game() noexcept : player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f }) {}
+Game::Game() : player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f }),
+laserTexture("./Assets/Laser.png"),
+barrierTexture("./Assets/Barrier.png"),
+alienTexture("./Assets/Alien.png"), 
+shipTextures{ {
+		 TextureResource("./Assets/Ship1.png"),
+		 TextureResource("./Assets/Ship2.png"),
+		 TextureResource("./Assets/Ship3.png")
+	 } } {}
 
 void Game::Start()
 {
