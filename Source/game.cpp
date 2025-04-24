@@ -62,6 +62,7 @@ void Game::Continue()
 }
 
 
+
 void Game::Update()
 {
 	switch (gameState)

@@ -44,9 +44,8 @@ struct Game
 
 	void Start();
 	void End();
-
 	void Continue();
-
+	//void Launch(Resources& res); 
 	void Update(); 
 
 	void Render();

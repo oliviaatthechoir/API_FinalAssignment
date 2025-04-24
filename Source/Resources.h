@@ -7,7 +7,7 @@
 
 struct Resources {
 	Resources(); 
-	~Resources() = default; 
+	 
 
 	std::vector<TextureResource> shipTextures;
 	TextureResource alienTexture;
