@@ -235,16 +235,16 @@ void Game::CheckAnyCollisions() {
 void Game::HandleAlienProjectile() noexcept {
 	if (++shootTimer >= shootInterval && !Aliens.empty()) {
 		shootTimer = 0;
-		if (Aliens.empty() > 0) {
-			int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1);
-			const Alien& shooter = Aliens[idx];
-			Vector2 spawnPos = { //TODO: conside rgiving player an interface for this instead. lite, Vector2 getGunPosition()
-				shooter.position.x + shooter.size.x / 2 - 5,
-				shooter.position.y + shooter.size.y
-			};
-			Vector2 vel = { 0, 6 };
-			Projectiles.emplace_back(spawnPos, vel);
-		}
+		
+		int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1);
+		const Alien& shooter = Aliens[idx];
+		Vector2 spawnPos = { //TODO: conside rgiving player an interface for this instead. lite, Vector2 getGunPosition()
+			shooter.position.x + shooter.size.x / 2 - 5,
+			shooter.position.y + shooter.size.y
+		};
+		Vector2 vel = { 0, 6 };
+		Projectiles.emplace_back(spawnPos, vel);
+		
 
 		//TODO: you will probably have to suppress the GSL warning about using at() here. 
 
