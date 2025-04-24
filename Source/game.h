@@ -26,7 +26,6 @@ struct Game
 	TextureResource alien = TextureResource("./Assets/Alien.png"); 
 
 
-
 	// Gamestate
 	State gameState = {};
 
@@ -51,7 +50,7 @@ struct Game
 
 	void SpawnAliens();
 
-	Player player{ {GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f} };
+	Player player;
 
 	std::vector<Projectile> Projectiles;
 
@@ -61,10 +60,7 @@ struct Game
 
 	Background bg = Background(100);
 
-
-	Vector2 alienPos; 
-	Vector2 cornerPos;
-	float offset;
+	Game(); 
 
 	int framesCounter = 0;
 private: 

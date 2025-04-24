@@ -9,11 +9,9 @@
 #include "Alien.h"
 
 
-
-
 const Background bg(100);
 
-
+Game::Game() : player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f }) {}
 
 void Game::Start()
 {
@@ -34,9 +32,6 @@ void Game::Start()
 		Walls.emplace_back(pos);
 	}
 
-
-	//creating player
-	player = Player(Vector2{ GetScreenWidth() / 2.0f, static_cast<float>(GetScreenHeight()) - 100 });
 
 	
 	//creating aliens
@@ -259,6 +254,8 @@ void Game::SpawnAliens()
 	}
 
 }
+
+
 
 
 
