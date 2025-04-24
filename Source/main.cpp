@@ -23,6 +23,7 @@
 
 #include "raylib.h"
 #include "game.h"
+#include <iostream>
 
 //TODO: clean up main.cpp, doesn't need that many variables
 //TOOD: use RAII for all resources (texture)
@@ -42,48 +43,36 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "SPACE INVADERS");
 
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-
-    Game game;
-    Resources resources;
-    
-    //--------------------------------------------------------------------------------------
-
-  
-   
-
-    // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    try
     {
-        // Update
-        //----------------------------------------------------------------------------------
-        // TODO: Update your variables here
-        //----------------------------------------------------------------------------------
-
-        game.Update();
-      
-
-        // Draw
-        //----------------------------------------------------------------------------------
-        BeginDrawing();
-
-        ClearBackground(BLACK);
-
-       
-
-        game.Render();
-
-        EndDrawing();
-        //----------------------------------------------------------------------------------
+        Resources resources;
+        Game game;
+        while (WindowShouldClose())
+        {
+            game.Update();
+            game.Render(); 
+        }
+        
+    }
+    catch (const std::runtime_error& e)
+    {
+        std::cerr << "Fatal error: " << e.what() << "\n"; 
+        CloseWindow();
+        return 1; 
     }
 
-    
-    
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
+    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
+    
+    BeginDrawing();
+
+    ClearBackground(BLACK);
+
+    EndDrawing();
+   
+    
+    CloseWindow(); 
    
 
     return 0;

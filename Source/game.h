@@ -44,17 +44,12 @@ struct Game
 
 	void Start();
 	void End();
-	void Continue();
-	//void Launch(Resources& res); 
+	void Continue(); 
 	void Update(); 
 
 	void Render();
 
 	void SpawnAliens();
-
-
-	// Entity Storage and Resources
-	Resources resources;
 
 	Player player; 
 
@@ -72,5 +67,8 @@ struct Game
 	float offset;
 
 	int framesCounter = 0;
+private: 
+	// Entity Storage and Resources
+	Resources resources;
 
 };
