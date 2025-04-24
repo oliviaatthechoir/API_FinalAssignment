@@ -26,14 +26,13 @@ class Game
 {
 public: 
 	Game() noexcept; 
-	//TODO: an example of how to use RAII to make safe use of resources as a members. Either everything loads and initializes correctly or Game will never construct.
 	std::array<TextureResource, 3> shipTextures{
 		TextureResource{"./Assets/Ship1.png"},
 		TextureResource{"./Assets/Ship2.png"},
 		TextureResource{"./Assets/Ship3.png"} }; 
-	TextureResource alienTexture = TextureResource("./Assets/Alien.png"); 
-	TextureResource barrierTexture = TextureResource("./Assets/Barrier.png"); 
-	TextureResource laserTexture = TextureResource("./Assets/Laser.png"); 
+	TextureResource alienTexture{ "./Assets/Alien.png" };
+	TextureResource barrierTexture{ "./Assets/Barrier.png" };
+	TextureResource laserTexture{ "./Assets/Laser.png" };
 
 
 	// Gamestate

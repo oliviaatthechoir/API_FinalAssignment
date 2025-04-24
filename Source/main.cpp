@@ -26,13 +26,14 @@
 #include "raylib.h"
 #pragma warning(pop)
 #include "game.h"
+#include "TextureResource.h"
 #include "Window.h"
 #include <iostream>
 #include <string_view>
+#include <stdexcept>
+#include <print>
+#include <format>
 using namespace std::string_view_literals; 
-//TOOD: use RAII for all resources (texture)
-
-
 
 int main(void)
 {   
@@ -47,14 +48,24 @@ int main(void)
     
         }        
     }
-    catch (const TextureLoadException& e)
-    {
-        std::cerr << "Load failed: " << e.what() << "\n";            
-    }//TODO: catch runtime_error and, always a good idea, std::exception and ...
-    catch (...) {
-        std::cerr << "bajs";
+    catch (const TextureLoadException& e) {
+        std::cerr << "Texture load error: " << e.what() << "\n"; 
+        return EXIT_FAILURE; 
     }
-   
+    catch (const std::runtime_error& e)
+    {
+        std::cerr << "Runtime error: " << e.what() << "\n";
+        return EXIT_FAILURE;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Exception: " << e.what() << "\n";
+        return EXIT_FAILURE;
+    }
+    catch (...) {
+        std::cerr << "Release me!!!!!!!!!!!!!! " << "\n";
+        return EXIT_FAILURE;
+    }
 
     return 0;
 }
