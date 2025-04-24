@@ -16,4 +16,6 @@ public:
 
 	void Update() override; 
 	void Render(const TextureResource& texture) const noexcept override; 
+
+	Vector2 GetGunPosition() const noexcept; 
 };

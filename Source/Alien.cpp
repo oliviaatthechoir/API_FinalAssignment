@@ -29,3 +29,10 @@ void Alien::Update() {
 void Alien::Render(const TextureResource& texture) const noexcept {
 	DrawTexture(texture.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 }
+
+Vector2 Alien::GetGunPosition() const noexcept {
+    return {
+        position.x + size.x / 2 - 5,  // Horizontal center
+        position.y + size.y          // Bottom of alien
+    };
+}
