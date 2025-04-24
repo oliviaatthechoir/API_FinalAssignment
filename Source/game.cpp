@@ -1,4 +1,5 @@
-﻿#include "game.h"
+﻿#pragma warning(disable : 4996)
+#include "game.h"
 #include <iostream>
 #include <vector>
 #include <chrono>
