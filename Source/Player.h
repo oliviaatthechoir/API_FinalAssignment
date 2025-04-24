@@ -15,6 +15,10 @@ public:
 	float timer = 0;
 
 	explicit Player(Vector2 pos) noexcept; 
+
+	
 	void Update();
 	void Render(const TextureResource& texture) const noexcept; 
+
+	
 };

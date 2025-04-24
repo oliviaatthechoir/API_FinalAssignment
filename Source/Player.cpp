@@ -8,6 +8,7 @@
 
 Player::Player(Vector2 pos) noexcept : Entity(pos, { 0, 0 }, { 100, 100 }) {}
 
+
 void Player::Update() {
 	direction = 0; 
 
@@ -28,5 +29,6 @@ void Player::Update() {
 
 void Player::Render(const TextureResource& texture) const noexcept {
 	DrawTexture(texture.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
+	
 }
 
