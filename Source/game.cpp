@@ -10,7 +10,7 @@
 #include <cassert>
 
 
-Game::Game() noexcept
+Game::Game()
 	: player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f }),
 	shipTextures{
 		TextureResource("./Assets/Ship1.png"),
