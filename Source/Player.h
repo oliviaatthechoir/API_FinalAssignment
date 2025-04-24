@@ -8,9 +8,8 @@ public:
 	int direction = 0; 
 	int activeTexture = 0; 
 	float timer = 0;
-	
-	Player(); 
-	Player(Vector2 pos); 
+
+	explicit Player(Vector2 pos); 
 	void Update(); 
 	void Render(Texture2D texture) const; 
 };

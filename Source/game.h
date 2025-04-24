@@ -51,7 +51,7 @@ struct Game
 
 	void SpawnAliens();
 
-	Player player; 
+	Player player{ {GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f} };
 
 	std::vector<Projectile> Projectiles;
 

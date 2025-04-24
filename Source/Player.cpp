@@ -1,8 +1,6 @@
 #include "raylib.h"
 #include "Player.h"
 
-Player::Player() = default; 
-
 Player::Player(Vector2 pos) : Entity(pos, { 0, 0 }, { 100, 100 }) {}
 
 void Player::Update() {
