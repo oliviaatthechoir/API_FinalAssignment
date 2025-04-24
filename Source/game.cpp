@@ -9,7 +9,7 @@
 #include "Alien.h"
 
 
-//TODO: seperate functionalities here
+
 
 const Background bg(100);
 
