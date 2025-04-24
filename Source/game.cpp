@@ -96,7 +96,7 @@ void Game::Update()
 		CleanEntities(); 
 		break;
 	case State::ENDSCREEN:
-		if (IsKeyPressed(KEY_SPACE)) {
+		if (IsKeyPressed(KEY_ENTER)) {
 			Start(); 
 		}
 		break;

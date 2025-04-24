@@ -2,6 +2,12 @@
 #pragma once
 #include "raylib.h"
 #include <stdexcept>
+#include <string>
+
+class WindowException : public std::runtime_error {
+public: 
+	explicit WindowException(const std::string& message) : std::runtime_error(message) {}
+};
 
 class Window {
 	int screenWidth = 1920; 
@@ -10,7 +16,7 @@ public:
 	explicit Window(const std::string_view& title) {
 		InitWindow(screenWidth, screenHeight, title.data()); 
 		if (!IsWindowReady()) {
-			throw std::runtime_error("failed to open window"); 
+			throw WindowException("failed to open window"); 
 		}
 		SetTargetFPS(60);
 	}
