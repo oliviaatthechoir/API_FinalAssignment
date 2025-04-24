@@ -11,7 +11,7 @@ class Projectile : public Entity {
 public: 
 	Projectile(Vector2 pos, Vector2 velocity); 
 
-	void Update(); 
-	void Render(const TextureResource& texture) const noexcept; 
+	void Update() override; 
+	void Render(const TextureResource& texture) const noexcept override; 
 };
 

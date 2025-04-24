@@ -17,8 +17,8 @@ public:
 	explicit Player(Vector2 pos) noexcept; 
 
 	
-	void Update();
-	void Render(const TextureResource& texture) const noexcept; 
+	void Update() override;
+	void Render(const TextureResource& texture) const noexcept override; 
 
 	
 };

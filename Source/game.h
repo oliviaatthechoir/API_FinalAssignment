@@ -24,7 +24,6 @@ enum struct State
 
 class Game
 {
-public: 
 	Game(); 
 	TextureResource laserTexture{ "./Assets/Laser.png" };
 	TextureResource barrierTexture{ "./Assets/Barrier.png" };
@@ -46,16 +45,16 @@ public:
 	int alienSpacing = 80;
 	Vector2 alienOrigin = { 450, 50 }; 
 	
-
-	void Start();
-	void End();
-	void Continue(); 
-	void Update(); 
-
-	void Render();
-
+	void End() noexcept;
 	void SpawnAliens();
 	void CleanEntities(); 
+
+
+	
+	void Continue(); 
+	
+
+
 
 	Player player;
 
@@ -70,7 +69,10 @@ public:
 
 	int framesCounter = 0;
 
-	
-	
+public:
+	void Start();
+	void Update();
+	void Render() noexcept;
+
 
 };

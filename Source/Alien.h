@@ -14,6 +14,6 @@ public:
 
 	explicit Alien(Vector2 pos); 
 
-	void Update(); 
-	void Render(const TextureResource& texture) const noexcept; 
+	void Update() override; 
+	void Render(const TextureResource& texture) const noexcept override; 
 };

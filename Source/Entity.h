@@ -15,7 +15,9 @@ public:
 
 	Entity(Vector2 pos, Vector2 vel, Vector2 size) noexcept; 
 
-	void Update(); 
-	void Render(const TextureResource& texture) const noexcept; 
+	virtual ~Entity() = default;
+
+	virtual void Update(); 
+	virtual void Render(const TextureResource& texture) const noexcept; 
 	Rectangle GetRect() const noexcept; 
 };

@@ -50,7 +50,7 @@ void Game::Start()
 
 }
 
-void Game::End()
+void Game::End() noexcept
 {
 	//SAVE SCORE AND UPDATE SCOREBOARD
 	Projectiles.clear();
@@ -194,7 +194,7 @@ void Game::Update()
 }
 
 
-void Game::Render()
+void Game::Render() noexcept
 {
 	BeginDrawing();
 	ClearBackground(BLACK);
