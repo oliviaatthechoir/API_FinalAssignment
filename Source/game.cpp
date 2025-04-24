@@ -129,7 +129,7 @@ void Game::Render() noexcept
 		DrawText(TextFormat("Lives: %i", player.lives), 50, 70, 40, YELLOW);
 
 		//player rendering
-		player.Render(shipTextures[0]); //TODO: always dwaring the first frame. Consider letting Player own the array isntead and decide what texture to draw each frame.
+		player.Render(shipTextures.at(0)); //TODO: always dwaring the first frame. Consider letting Player own the array isntead and decide what texture to draw each frame.
 
 
 		//projectile rendering
