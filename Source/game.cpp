@@ -1,4 +1,6 @@
-﻿#include "game.h"
+﻿#pragma warning (push)
+#pragma warning (disable : 26481)
+#include "game.h"
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -8,6 +10,7 @@
 #include "Utilities.h"
 #include "Alien.h"
 #include <cassert>
+#pragma warning (pop)
 
 
 Game::Game()
@@ -233,8 +236,8 @@ void Game::CheckAnyCollisions() {
 void Game::HandleAlienProjectile() noexcept {
 	if (++shootTimer >= shootInterval && !Aliens.empty()) {
 		shootTimer = 0;
-		int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1);
-		const Alien& shooter = Aliens[idx];
+		const int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1);
+		const Alien& shooter = Aliens.at(idx);
 		Vector2 spawnPos = shooter.GetGunPosition(); 
 		Vector2 vel = { 0, 6 };
 		Projectiles.emplace_back(spawnPos, vel);
