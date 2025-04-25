@@ -92,7 +92,7 @@ void Game::Update()
 
 		}
 		HandleAlienProjectile(); 
-		CheckAnyCollisions(); 
+		CollisionHitCheck(); 
 		CleanEntities(); 
 		break;
 	case State::ENDSCREEN:
@@ -202,35 +202,44 @@ void Game::SpawnWalls() {
 	}
 }
 
-void Game::CheckAnyCollisions() {
-	for (auto& projectile : Projectiles)
-	{
-		if (projectile.velocity.y < 0) {
-			for (auto& alien : Aliens)
-			{
-				if (AABB(projectile, alien)) {
-					alien.active = false;
-					projectile.active = false;
-					break;
-				}
-			}
-		}
+void Game::CollisionHitCheck() noexcept {
+	for (auto& projectile : Projectiles) {
+		WallHitCheck(projectile);
+		PlayerHitCheck(projectile);
+		AlienHitCheck(projectile);
+	}
+	 
 
-		if (projectile.velocity.y > 0 && AABB(projectile, player)) {
+}
+
+void Game::WallHitCheck(Projectile& projectile) noexcept {	
+	for (auto& wall : Walls) {
+		if (AABB(projectile, wall)) {
+			wall.health--;
 			projectile.active = false;
-			player.lives--;
+			break;
 		}
+	}
+	
+}
 
-		for (auto& wall : Walls) {
-			if (AABB(projectile, wall)) {
-				std::cout << "Hit wall at position: " << wall.position.x << ", health: " << wall.health << "\n";
-				wall.health--;
+void Game::PlayerHitCheck(Projectile& projectile) noexcept {
+	if (projectile.velocity.y > 0 && AABB(projectile, player)) {
+		projectile.active = false;
+		player.lives--;
+	}
+}
+
+void Game::AlienHitCheck(Projectile& projectile) noexcept {
+	if (projectile.velocity.y < 0) {
+		for (auto& alien : Aliens) {
+			if (AABB(projectile, alien)) {
+				alien.active = false;
 				projectile.active = false;
 				break;
 			}
 		}
 	}
-
 }
 
 void Game::HandleAlienProjectile() noexcept {
