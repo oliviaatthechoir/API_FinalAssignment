@@ -21,31 +21,6 @@
 #pragma warning(disable : 26446)
 #pragma warning (pop)
 
-Game::Game() noexcept : player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f })
-{
-}
-
-bool Game::initializeResources()
-{
-	try {
-		shipTextures.at(0) = std::make_unique<TextureResource>("./Assets/Ship1.png");
-		shipTextures.at(1) = std::make_unique<TextureResource>("./Assets/Ship2.png");
-		shipTextures.at(2) = std::make_unique<TextureResource>("./Assets/Ship3.png");
-
-		alienTexture = TextureResource("./Assets/Alien.png");
-		barrierTexture = TextureResource("./Assets/Barrier.png");
-		laserTexture = TextureResource("./Assets/Laser.png");
-
-		return true;
-	}
-	catch (const TextureLoadException& e) {
-		std::cerr << "Texture load failed: " << e.what() << "\n";
-		return false;
-	}
-}
-
-	
-
 
 void Game::Start()
 {
@@ -155,7 +130,7 @@ void Game::Render() noexcept
 
 		DrawText(TextFormat("Lives: %i", player.lives), 50, 70, 40, YELLOW);
 
-		player.Render(*shipTextures.at(player.activeTexture)); 
+		player.Render(); 
 
 		for (auto const& projectile : Projectiles)
 		{
@@ -236,7 +211,7 @@ void Game::WallHitCheck(Projectile& projectile) noexcept {
 		if (AABB(projectile, wall)) {
 			wall.health--;
 			projectile.active = false;
-			break;
+			return;
 		}
 	}
 	
@@ -255,7 +230,7 @@ void Game::AlienHitCheck(Projectile& projectile) noexcept {
 			if (AABB(projectile, alien)) {
 				alien.active = false;
 				projectile.active = false;
-				break;
+				return;
 			}
 		}
 	}
@@ -271,18 +246,23 @@ void Game::HandleAlienProjectile() noexcept {
 	if (size > 1)
 	{
 		[[gsl::suppress(26472, justification: "I don't care about narrowing conversions here")]]
-		const auto max = static_cast<int>(size - 1);
-		const int randIdx = GetRandomValue(0, max);
-		randomAlienIndex = static_cast<size_t>(randIdx); 
+		const auto max = static_cast<int>(size - 1);		
+		randomAlienIndex = static_cast<size_t>(GetRandomValue(0, max));
 	}
-
-	std::span<const Alien> const alienSpan{ Aliens };
+	
+	
+	assert(randomAlienIndex >= 0 && randomAlienIndex < Aliens.size());
 	[[gsl::suppress(26446, justification: "Span access is bounds-checked and safe here")]]
-	const Alien& shooter = alienSpan[randomAlienIndex];
+	const Alien& shooter = Aliens[randomAlienIndex];
 	const Vector2 spawnPos = shooter.GetGunPosition();
 	const Vector2 velocity = { 0, 6 };
-	Projectiles.emplace_back(spawnPos, velocity);
-
+	try {
+		Projectiles.emplace_back(spawnPos, velocity);
+	}
+	catch (...) {
+		assert(false && "hey, we ran out of memory apparently");
+		//swallow. The game doesn't need to end because of a missing bullet
+	}
 }
 
 void Game::CleanEntities() {

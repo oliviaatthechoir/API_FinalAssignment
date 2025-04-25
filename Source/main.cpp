@@ -40,10 +40,8 @@ int main(void)
     try
     {
         Window window("SPACE INVADERS");
-        Game game;
-        game.initializeResources(); 
-        while (!WindowShouldClose())
-        {
+        Game game{};
+        while (!WindowShouldClose()){
             game.Update();
             game.Render(); 
     

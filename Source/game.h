@@ -14,6 +14,7 @@
 #include <string>
 #include <array>
 #include <optional>
+#include <string_view>
 
 enum struct State
 {
@@ -26,10 +27,7 @@ enum struct State
 class Game
 {
 public: 
-	Game() noexcept; 
 
-
-	std::array<std::unique_ptr<TextureResource>, 3> shipTextures;
 	TextureResource alienTexture{ "./Assets/Alien.png" };
 	TextureResource barrierTexture{ "./Assets/Barrier.png" };
 	TextureResource laserTexture{ "./Assets/Laser.png" };
@@ -44,6 +42,8 @@ public:
 	int formationHeight = 5;
 	int alienSpacing = 80;
 	Vector2 alienOrigin = { 450, 50 }; 
+
+
 	
 	void End() noexcept;
 	void SpawnAliens();
@@ -65,13 +65,12 @@ public:
 
 	Background bg = Background(100);
 
-	Player player;
+	Player player{ { GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f } };
 
 	void Start();
 	void Update();
 	void Render() noexcept;
 
-	bool isGameOver() const noexcept { return gameOver; }
-	bool initializeResources(); 
+	bool isGameOver() const noexcept { return gameOver; }	
 
 };

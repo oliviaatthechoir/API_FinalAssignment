@@ -5,7 +5,7 @@
 #pragma warning(pop)
 #include "Player.h"
 #include "TextureResource.h"
-
+#include <cassert>
 Player::Player(Vector2 pos) noexcept : Entity(pos, { 0, 0 }, { 100, 100 }) {}
 
 
@@ -22,13 +22,16 @@ void Player::Update() noexcept {
 
 	timer += GetFrameTime(); 
 	if (timer > 0.4f) {
-		activeTexture = (activeTexture + 1) % 3; 
+		activeTexture = (activeTexture + 1) % shipTextures.size();
 		timer = 0; 
 	}
 }
 
-void Player::Render(const TextureResource& texture) const noexcept {
-	DrawTexture(texture.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
+void Player::Render() const noexcept {
+	assert(activeTexture < shipTextures.size());
+	[[gsl::suppress(26446, justification: "The index is guarantueed to be valid.")]]
+	const auto& tex = shipTextures[activeTexture];
+	DrawTexture(tex.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 	
 }
 
