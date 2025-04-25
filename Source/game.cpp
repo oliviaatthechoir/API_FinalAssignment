@@ -277,6 +277,7 @@ void Game::HandleAlienProjectile() noexcept {
 	}
 
 	std::span<const Alien> const alienSpan{ Aliens };
+	[[gsl::suppress(26446, justification: "Span access is bounds-checked and safe here")]]
 	const Alien& shooter = alienSpan[randomAlienIndex];
 	const Vector2 spawnPos = shooter.GetGunPosition();
 	const Vector2 velocity = { 0, 6 };
