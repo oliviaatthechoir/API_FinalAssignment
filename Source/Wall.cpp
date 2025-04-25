@@ -9,7 +9,7 @@
 #include <string>
 #include <format>
 
-Wall::Wall(Vector2 pos) : Entity(pos, {0, 0}, {200, 200}) {}
+Wall::Wall(Vector2 pos) noexcept : Entity(pos, {0, 0}, {200, 200}) {}
 
 void Wall::Update() noexcept {
 	if (health <= 0) {
@@ -17,15 +17,20 @@ void Wall::Update() noexcept {
 	}
 }
 
-void Wall::Render(const TextureResource& texture) const noexcept {
+void Wall::Render(const TextureResource& texture) const {
+   
     DrawTexture(texture.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 
-    int fontSize = 24;
-    std::string text = std::format("{}", std::max(0, health));
-    int textWidth = MeasureText(text.c_str(), fontSize); // still needed for width
+    constexpr int fontSize = 20;
 
-    auto textX = static_cast<int>(position.x + size.x / 2 - static_cast<float>(textWidth) / 2);
-    auto textY = static_cast<int>(position.y + size.y / 2 - static_cast<float>(fontSize) / 2 + 4);
+    const std::string text = std::to_string(health); 
+    const int textWidth = MeasureText(text.data(), fontSize); 
+    const int textHeight = fontSize;
 
-    DrawTextCpp(text, textX, textY, fontSize, RED);
+    const float textX = position.x + (size.x - static_cast<float>(textWidth)) / 2.0f;
+    const float textY = position.y + (size.y - static_cast<float>(textHeight)) / 2.0f;
+
+    DrawText(text.data(), static_cast<int>(textX), static_cast<int>(textY), fontSize, RED);
+   
+
 }

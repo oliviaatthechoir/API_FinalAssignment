@@ -5,7 +5,7 @@
 #pragma warning(pop)
 #include "Alien.h"
 
-Alien::Alien(Vector2 pos) : Entity(pos, { 0, 0 }, { 100, 100 }) {}
+Alien::Alien(Vector2 pos) noexcept : Entity(pos, { 0, 0 }, { 100, 100 }) {}
 
 void Alien::Update() noexcept {
     if (moveRight) {

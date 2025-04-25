@@ -9,7 +9,7 @@
 
 class Projectile : public Entity {
 public: 
-	Projectile(Vector2 pos, Vector2 velocity); 
+	Projectile(Vector2 pos, Vector2 velocity) noexcept; 
 
 	void Update() noexcept override; 
 	void Render(const TextureResource& texture) const noexcept override; 

@@ -12,7 +12,7 @@ public:
 	int health = 50; 
 	int radius = 60; 
 
-	explicit Wall(Vector2 pos); 
+	explicit Wall(Vector2 pos) noexcept; 
 	void Update() noexcept override; 
-	void Render(const TextureResource& texture) const noexcept override; 
+	void Render(const TextureResource& texture) const override;
 };

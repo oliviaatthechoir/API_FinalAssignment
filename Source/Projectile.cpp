@@ -5,7 +5,7 @@
 #pragma warning(pop)
 #include "Projectile.h"
 
-Projectile::Projectile(Vector2 pos, Vector2 vel) : Entity(pos, vel, {3, 15}) {}
+Projectile::Projectile(Vector2 pos, Vector2 vel) noexcept : Entity(pos, vel, {3, 15}) {}
 
 void Projectile::Update() noexcept {
 	Entity::Update(); 

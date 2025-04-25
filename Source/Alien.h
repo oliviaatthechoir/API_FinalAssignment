@@ -12,7 +12,7 @@ public:
 	bool moveRight = true;
 	int speed = 2; 
 
-	explicit Alien(Vector2 pos); 
+	explicit Alien(Vector2 pos) noexcept; 
 
 	void Update() noexcept override; 
 	void Render(const TextureResource& texture) const noexcept override; 

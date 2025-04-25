@@ -8,7 +8,7 @@ void Entity::Update() noexcept {
 	position.y += velocity.y; 
 }
 
-void Entity::Render(const TextureResource& texture) const noexcept{
+void Entity::Render(const TextureResource& texture) const {
 	DrawRectangleV(position, size, GRAY); 
 }
 
