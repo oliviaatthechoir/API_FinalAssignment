@@ -71,9 +71,6 @@ public:
 	Background bg = Background(100);
 
 
-	int framesCounter = 0;
-
-
 	void Start();
 	void Update();
 	void Render() noexcept;
