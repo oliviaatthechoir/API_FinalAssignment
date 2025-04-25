@@ -1,7 +1,8 @@
-#pragma once
 #include <CodeAnalysis/Warnings.h>
+#pragma once
 #pragma warning(push)
 #pragma warning(disable:ALL_CODE_ANALYSIS_WARNINGS)
+#pragma warning(disable : 5592)
 #include "raylib.h"
 #pragma warning(pop)
 #include <vector>
