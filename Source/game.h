@@ -29,7 +29,7 @@ public:
 	Game() noexcept; 
 
 
-	std::array<std::optional<TextureResource>, 3> shipTextures;
+	std::array<std::unique_ptr<TextureResource>, 3> shipTextures;
 	TextureResource alienTexture{ "./Assets/Alien.png" };
 	TextureResource barrierTexture{ "./Assets/Barrier.png" };
 	TextureResource laserTexture{ "./Assets/Laser.png" };

@@ -50,7 +50,8 @@ public:
 		UnloadTexture(texture);
 	}
 
-	const Texture2D& Get() const noexcept { return texture; }
+	Texture2D Get() const noexcept { return texture; }
+
 
 
 };

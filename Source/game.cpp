@@ -24,26 +24,27 @@ Game::Game() noexcept : player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 13
 {
 }
 
-bool Game::initializeResources() {
-	try
-	{
-		shipTextures = {
-			TextureResource("./Assets/Ship1.png"),
-			TextureResource("./Assets/Ship2.png"),
-			TextureResource("./Assets/Ship3.png")
-		};
+bool Game::initializeResources()
+{
+	try {
+		shipTextures[0] = std::make_unique<TextureResource>("./Assets/Ship1.png");
+		shipTextures[1] = std::make_unique<TextureResource>("./Assets/Ship2.png");
+		shipTextures[2] = std::make_unique<TextureResource>("./Assets/Ship3.png");
+
 		alienTexture = TextureResource("./Assets/Alien.png");
 		barrierTexture = TextureResource("./Assets/Barrier.png");
 		laserTexture = TextureResource("./Assets/Laser.png");
 
-		return true; 
+		return true;
 	}
-	catch (const TextureLoadException& e)
-	{
-		std::cerr << "Resource initialization failed: " << e.what() << std::endl;
+	catch (const TextureLoadException& e) {
+		std::cerr << "Texture load failed: " << e.what() << "\n";
 		return false;
 	}
 }
+
+	
+
 
 void Game::Start()
 {

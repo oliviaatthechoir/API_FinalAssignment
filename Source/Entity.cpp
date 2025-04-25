@@ -9,7 +9,7 @@ void Entity::Update() noexcept {
 }
 
 void Entity::Render(const TextureResource& texture) const noexcept{
-	DrawRectangleV(position, size, GRAY); 
+	DrawTextureV(texture.Get(), size, GRAY);
 }
 
 Rectangle Entity::GetRect() const noexcept {
