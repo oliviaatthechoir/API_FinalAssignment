@@ -24,7 +24,7 @@ void Wall::Render(const TextureResource& texture) const noexcept{
 
     const std::string text = std::to_string(health);
     const int textWidth = MeasureText(text.data(), fontSize);
-    const int textHeight = fontSize;
+    constexpr int textHeight = fontSize;
 
     const float textX = position.x + (size.x - static_cast<float>(textWidth)) / 2.0f;
     const float textY = position.y + (size.y - static_cast<float>(textHeight)) / 2.0f;

@@ -258,7 +258,10 @@ void Game::AlienHitCheck(Projectile& projectile) noexcept {
 void Game::HandleAlienProjectile() noexcept {
 	if (++shootTimer >= shootInterval && !Aliens.empty()) {
 		shootTimer = 0;
-		const int idx = GetRandomValue(0, static_cast<int>(Aliens.size()) - 1);
+		const auto size = Aliens.size();
+		if (size == 0) return;
+
+		const int idx = GetRandomValue(0, static_cast<int>(size - 1));
 		const Alien& shooter = Aliens.at(idx);
 		Vector2 spawnPos = shooter.GetGunPosition(); 
 		Vector2 vel = { 0, 6 };
