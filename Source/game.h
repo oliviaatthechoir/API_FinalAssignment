@@ -34,17 +34,12 @@ public:
 	TextureResource barrierTexture{ "./Assets/Barrier.png" };
 	TextureResource laserTexture{ "./Assets/Laser.png" };
 
-
-	// Gamestate
 	State gameState = {};
 
-	//Aliens shooting
 	int shootTimer = 0;
 	int shootInterval = 60; 
 	bool gameOver = false; 
 
-
-	//Alien formation data! 
 	int formationWidth = 8;
 	int formationHeight = 5;
 	int alienSpacing = 80;

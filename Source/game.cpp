@@ -47,7 +47,6 @@ bool Game::initializeResources() {
 
 void Game::Start()
 {
-	player = Player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f });
 	SpawnAliens();
 	SpawnWalls(); 
 
@@ -142,7 +141,6 @@ void Game::Render() noexcept
 	switch (gameState)
 	{
 	case State::STARTSCREEN:
-		//Code
 
 		DrawText("SPACE INVADERS", 200, 100, 160, YELLOW);
 
@@ -155,29 +153,23 @@ void Game::Render() noexcept
 
 		DrawText(TextFormat("Lives: %i", player.lives), 50, 70, 40, YELLOW);
 
-		//player rendering
 		player.Render(*shipTextures.at(player.activeTexture)); 
 
-
-		//projectile rendering
 		for (auto const& projectile : Projectiles)
 		{
 			projectile.Render(laserTexture);
 
 		}
 
-		// wall rendering 
 		for (auto const& wall : Walls)
 		{
 			wall.Render(barrierTexture); 
 		}
 
-		//alien rendering  
 		for (auto const& alien : Aliens)
 		{
 			alien.Render(alienTexture);
 		}
-
 
 		break;
 	case State::ENDSCREEN:
@@ -281,7 +273,7 @@ void Game::HandleAlienProjectile() noexcept {
 		[[gsl::suppress(26472, justification: "I don't care about narrowing conversions here")]]
 		const auto max = static_cast<int>(size - 1);
 		const int randIdx = GetRandomValue(0, max);
-		randomAlienIndex = static_cast<size_t>(randIdx); // no narrowing: int -> size_t is safe here
+		randomAlienIndex = static_cast<size_t>(randIdx); 
 	}
 
 	std::span<const Alien> const alienSpan{ Aliens };

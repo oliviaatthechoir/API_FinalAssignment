@@ -12,7 +12,7 @@ void Alien::Update() noexcept {
         velocity.x = static_cast<float>(speed);
         if (position.x + size.x >= static_cast<float>(GetScreenWidth())) {
             moveRight = false;
-            position.y += size.y; // descend one row
+            position.y += size.y; 
         }
     }
     else {
@@ -32,7 +32,7 @@ void Alien::Render(const TextureResource& texture) const noexcept {
 
 Vector2 Alien::GetGunPosition() const noexcept {
     return {
-        position.x + size.x / 2 - 5,  // Horizontal center
-        position.y + size.y          // Bottom of alien
+        position.x + size.x / 2 - 5, 
+        position.y + size.y          
     };
 }
