@@ -1,7 +1,4 @@
 ﻿#pragma warning (push)
-#pragma warning (disable : 26481)
-#pragma warning(disable : 4201)
-#pragma warning(disable : 4996)
 #include "game.h"
 #include <iostream>
 #include <vector>
@@ -15,6 +12,10 @@
 #include "raylib.h"
 #include "TextureResource.h"
 #include <span>
+
+#pragma warning (disable : 26481)
+#pragma warning(disable : 4201)
+#pragma warning(disable : 4996)
 #pragma warning(disable : 26472)
 #pragma warning(disable : 26447)
 #pragma warning(disable : 26446)
@@ -27,9 +28,9 @@ Game::Game() noexcept : player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 13
 bool Game::initializeResources()
 {
 	try {
-		shipTextures[0] = std::make_unique<TextureResource>("./Assets/Ship1.png");
-		shipTextures[1] = std::make_unique<TextureResource>("./Assets/Ship2.png");
-		shipTextures[2] = std::make_unique<TextureResource>("./Assets/Ship3.png");
+		shipTextures.at(0) = std::make_unique<TextureResource>("./Assets/Ship1.png");
+		shipTextures.at(1) = std::make_unique<TextureResource>("./Assets/Ship2.png");
+		shipTextures.at(2) = std::make_unique<TextureResource>("./Assets/Ship3.png");
 
 		alienTexture = TextureResource("./Assets/Alien.png");
 		barrierTexture = TextureResource("./Assets/Barrier.png");
