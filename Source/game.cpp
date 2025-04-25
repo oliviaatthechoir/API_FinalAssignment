@@ -55,14 +55,14 @@ bool Game::CheckForGameOver() const noexcept {
 		return std::ranges::any_of(Walls, [&alien](const Wall& wall) noexcept {
 			return AABB(alien, wall);
 			});
-	};
+		};
 
 
 	return {
 		IsKeyReleased(KEY_Q) ||
 		(player.lives < 1) ||
 		std::ranges::any_of(Aliens, collidedWithWall)
-	}; 
+	};
 
 }
 
