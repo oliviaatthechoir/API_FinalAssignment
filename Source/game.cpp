@@ -195,8 +195,6 @@ void Game::SpawnAliens()
 				alienOrigin.y + (row * alienSpacing)
 			}; 
 			Aliens.emplace_back(position);
-			std::cout << "Find Alien -X:" << position.x << std::endl;
-			std::cout << "Find Alien -Y:" << position.y << std::endl;
 		}
 	}
 
