@@ -260,8 +260,8 @@ void Game::HandleAlienProjectile() noexcept {
 		shootTimer = 0;
 		const auto size = Aliens.size();
 		if (size == 0) return;
-
-		const int idx = GetRandomValue(0, static_cast<int>(size - 1));
+		const int max = static_cast<int>(size) - 1;
+		const int idx = GetRandomValue(0, max);
 		const Alien& shooter = Aliens.at(idx);
 		Vector2 spawnPos = shooter.GetGunPosition(); 
 		Vector2 vel = { 0, 6 };
