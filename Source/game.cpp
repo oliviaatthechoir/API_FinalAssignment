@@ -1,5 +1,7 @@
 ﻿#pragma warning (push)
 #pragma warning (disable : 26481)
+#pragma warning(disable : 4201)
+#pragma warning(disable : 4996)
 #include "game.h"
 #include <iostream>
 #include <vector>
@@ -10,6 +12,7 @@
 #include "Utilities.h"
 #include "Alien.h"
 #include <cassert>
+#include "raylib.h"
 #pragma warning (pop)
 
 
