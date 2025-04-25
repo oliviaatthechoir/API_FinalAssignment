@@ -13,8 +13,10 @@
 #include "Alien.h"
 #include <cassert>
 #include "raylib.h"
+#include <span>
 #pragma warning(disable : 26472)
 #pragma warning(disable : 26447)
+#pragma warning(disable : 26446)
 #pragma warning (pop)
 
 
@@ -256,18 +258,25 @@ void Game::AlienHitCheck(Projectile& projectile) noexcept {
 }
 
 void Game::HandleAlienProjectile() noexcept {
-	if (++shootTimer >= shootInterval && !Aliens.empty()) {
-		shootTimer = 0;
-		const auto size = Aliens.size();
-		if (size == 0) return;
-		const int max = static_cast<int>(size) - 1;
-		const int idx = GetRandomValue(0, max);
-		const Alien& shooter = Aliens.at(idx);
-		Vector2 spawnPos = shooter.GetGunPosition(); 
-		Vector2 vel = { 0, 6 };
-		Projectiles.emplace_back(spawnPos, vel);
+	const size_t size = Aliens.size();
+	if (++shootTimer < shootInterval || size == 0) return;
 
+	shootTimer = 0;
+
+	size_t randomAlienIndex = 0;
+	if (size > 1)
+	{
+		[[gsl::suppress(26472, justification: "I don't care about narrowing conversions here")]]
+		const auto max = static_cast<int>(size - 1);
+		const int randIdx = GetRandomValue(0, max);
+		randomAlienIndex = static_cast<size_t>(randIdx); // no narrowing: int -> size_t is safe here
 	}
+
+	std::span<const Alien> const alienSpan{ Aliens };
+	const Alien& shooter = alienSpan[randomAlienIndex];
+	const Vector2 spawnPos = shooter.GetGunPosition();
+	const Vector2 velocity = { 0, 6 };
+	Projectiles.emplace_back(spawnPos, velocity);
 
 }
 
