@@ -19,5 +19,5 @@ public:
 
 	virtual void Update() noexcept; 
 	virtual void Render(const TextureResource& texture) const noexcept; 
-	Rectangle GetRect() const noexcept; 
+	virtual Rectangle GetRect() const noexcept; 
 };
