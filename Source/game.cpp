@@ -46,11 +46,19 @@ void Game::End() noexcept
 }
 
 bool Game::CheckForGameOver() const noexcept {
-	const auto pos = player.player_base_height; 
-	const auto reachedEnding = [pos](const Alien& a) noexcept {
-		return (a.position.y > static_cast<float>(GetScreenHeight()) - pos); 
+	const auto collidedWithWall = [this](const Alien& alien) noexcept {
+		return std::ranges::any_of(Walls, [&alien](const Wall& wall) noexcept {
+			return AABB(alien, wall);
+			});
+	};
+
+
+	return {
+		IsKeyReleased(KEY_Q) ||
+		(player.lives < 1) ||
+		std::ranges::any_of(Aliens, collidedWithWall)
 	}; 
-	return(IsKeyReleased(KEY_Q) || (player.lives < 1) || std::ranges::any_of(Aliens, reachedEnding)); 
+
 }
 
 void Game::Update()

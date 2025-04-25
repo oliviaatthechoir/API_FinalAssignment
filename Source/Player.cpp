@@ -9,7 +9,7 @@
 Player::Player(Vector2 pos) noexcept : Entity(pos, { 0, 0 }, { 100, 100 }) {}
 
 
-void Player::Update() {
+void Player::Update() noexcept {
 	direction = 0; 
 
 	if(IsKeyDown(KEY_LEFT)) direction--; 

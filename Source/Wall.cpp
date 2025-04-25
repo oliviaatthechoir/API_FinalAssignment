@@ -11,7 +11,7 @@
 
 Wall::Wall(Vector2 pos) : Entity(pos, {0, 0}, {200, 200}) {}
 
-void Wall::Update() {
+void Wall::Update() noexcept {
 	if (health <= 0) {
 		active = false; 
 	}

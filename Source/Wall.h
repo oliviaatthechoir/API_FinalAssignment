@@ -13,6 +13,6 @@ public:
 	int radius = 60; 
 
 	explicit Wall(Vector2 pos); 
-	void Update() override; 
+	void Update() noexcept override; 
 	void Render(const TextureResource& texture) const noexcept override; 
 };

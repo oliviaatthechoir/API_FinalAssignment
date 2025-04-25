@@ -3,7 +3,7 @@
 
 Entity::Entity(Vector2 pos, Vector2 vel, Vector2 size) noexcept : position(pos), velocity(vel), size(size), active(true) {}
 
-void Entity::Update() {
+void Entity::Update() noexcept {
 	position.x += velocity.x; 
 	position.y += velocity.y; 
 }

@@ -7,7 +7,7 @@
 
 Alien::Alien(Vector2 pos) : Entity(pos, { 0, 0 }, { 100, 100 }) {}
 
-void Alien::Update() {
+void Alien::Update() noexcept {
     if (moveRight) {
         velocity.x = static_cast<float>(speed);
         if (position.x + size.x >= static_cast<float>(GetScreenWidth())) {

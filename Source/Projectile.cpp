@@ -7,7 +7,7 @@
 
 Projectile::Projectile(Vector2 pos, Vector2 vel) : Entity(pos, vel, {3, 15}) {}
 
-void Projectile::Update() {
+void Projectile::Update() noexcept {
 	Entity::Update(); 
 
 	if (position.y < -size.y || position.y > static_cast<float>(GetScreenHeight())) {
