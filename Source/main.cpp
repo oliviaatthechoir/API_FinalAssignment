@@ -41,6 +41,7 @@ int main(void)
     {
         Window window("SPACE INVADERS");
         Game game;
+        game.initializeResources(); 
         while (!WindowShouldClose())
         {
             game.Update();

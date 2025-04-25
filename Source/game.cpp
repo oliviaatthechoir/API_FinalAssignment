@@ -13,29 +13,41 @@
 #include "Alien.h"
 #include <cassert>
 #include "raylib.h"
+#include "TextureResource.h"
 #include <span>
 #pragma warning(disable : 26472)
 #pragma warning(disable : 26447)
 #pragma warning(disable : 26446)
 #pragma warning (pop)
 
-
-Game::Game()
-	: player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f }),
-	shipTextures{
-		TextureResource("./Assets/Ship1.png"),
-		TextureResource("./Assets/Ship2.png"),
-		TextureResource("./Assets/Ship3.png")
-	},
-	alienTexture("./Assets/Alien.png"),
-	barrierTexture("./Assets/Barrier.png"),
-	laserTexture("./Assets/Laser.png")
+Game::Game() noexcept : player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f })
 {
+}
+
+bool Game::initializeResources() {
+	try
+	{
+		shipTextures = {
+			TextureResource("./Assets/Ship1.png"),
+			TextureResource("./Assets/Ship2.png"),
+			TextureResource("./Assets/Ship3.png")
+		};
+		alienTexture = TextureResource("./Assets/Alien.png");
+		barrierTexture = TextureResource("./Assets/Barrier.png");
+		laserTexture = TextureResource("./Assets/Laser.png");
+
+		return true; 
+	}
+	catch (const TextureLoadException& e)
+	{
+		std::cerr << "Resource initialization failed: " << e.what() << std::endl;
+		return false;
+	}
 }
 
 void Game::Start()
 {
-
+	player = Player({ GetScreenWidth() / 2.0f, GetScreenHeight() - 130.0f });
 	SpawnAliens();
 	SpawnWalls(); 
 
@@ -144,7 +156,7 @@ void Game::Render() noexcept
 		DrawText(TextFormat("Lives: %i", player.lives), 50, 70, 40, YELLOW);
 
 		//player rendering
-		player.Render(shipTextures.at(player.activeTexture)); 
+		player.Render(*shipTextures.at(player.activeTexture)); 
 
 
 		//projectile rendering

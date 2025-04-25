@@ -13,6 +13,7 @@
 #include "Wall.h"
 #include <string>
 #include <array>
+#include <optional>
 
 enum struct State
 {
@@ -25,11 +26,10 @@ enum struct State
 class Game
 {
 public: 
-	Game(); 
+	Game() noexcept; 
 
 
-	Player player;
-	std::array<TextureResource, 3> shipTextures; 
+	std::array<std::optional<TextureResource>, 3> shipTextures;
 	TextureResource alienTexture{ "./Assets/Alien.png" };
 	TextureResource barrierTexture{ "./Assets/Barrier.png" };
 	TextureResource laserTexture{ "./Assets/Laser.png" };
@@ -70,11 +70,13 @@ public:
 
 	Background bg = Background(100);
 
+	Player player;
 
 	void Start();
 	void Update();
 	void Render() noexcept;
 
 	bool isGameOver() const noexcept { return gameOver; }
+	bool initializeResources(); 
 
 };
