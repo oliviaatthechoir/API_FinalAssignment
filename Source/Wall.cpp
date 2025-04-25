@@ -17,20 +17,16 @@ void Wall::Update() noexcept {
 	}
 }
 
-void Wall::Render(const TextureResource& texture) const {
-   
+void Wall::Render(const TextureResource& texture) const noexcept{
     DrawTexture(texture.Get(), static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 
     constexpr int fontSize = 20;
-
-    const std::string text = std::to_string(health); 
-    const int textWidth = MeasureText(text.data(), fontSize); 
-    const int textHeight = fontSize;
+    const int textWidth = MeasureText(TextFormat("%d", health), fontSize);
 
     const float textX = position.x + (size.x - static_cast<float>(textWidth)) / 2.0f;
-    const float textY = position.y + (size.y - static_cast<float>(textHeight)) / 2.0f;
+    const float textY = position.y + (size.y - static_cast<float>(fontSize)) / 2.0f;
 
-    DrawText(text.data(), static_cast<int>(textX), static_cast<int>(textY), fontSize, RED);
+    DrawText(TextFormat("%d", health), static_cast<int>(textX), static_cast<int>(textY), fontSize, RED);
    
 
 }

@@ -18,6 +18,6 @@ public:
 	virtual ~Entity() = default;
 
 	virtual void Update() noexcept; 
-	virtual void Render(const TextureResource& texture) const; 
+	virtual void Render(const TextureResource& texture) const noexcept; 
 	Rectangle GetRect() const noexcept; 
 };

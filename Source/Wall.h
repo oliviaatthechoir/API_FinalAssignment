@@ -14,5 +14,5 @@ public:
 
 	explicit Wall(Vector2 pos) noexcept; 
 	void Update() noexcept override; 
-	void Render(const TextureResource& texture) const override;
+	void Render(const TextureResource& texture) const noexcept override;
 };
