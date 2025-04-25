@@ -67,7 +67,7 @@ int main(void)
         
     }
     catch (...) {
-        std::cerr << "Release me!!!!!!!!!!!!!! " << "\n";
+        std::cerr << "Something BAD happened." << "\n";
        
     }
 
